@@ -43,10 +43,12 @@ function translateAnchor($anchor) {
 }
 
 function makeLinksHAB($shelfmarkString) {
-        $shelfmarks = explode(';', $shelfmarkString); 
+        $shelfmarks = explode(';', $shelfmarkString);
+        $translation = array('(' => '', ')' => '');
         $linksCopiesHAB = array();
         foreach ($shelfmarks as $shelfmark) {
-            $linksCopiesHAB[] = '<a href="http://opac.lbs-braunschweig.gbv.de/DB=2/SRCH?TRM=sgb+'.urlencode($shelfmark).'" title="Exemplar im OPAC suchen" target="_blank">'.$shelfmark.'</a>';
+            $shelfmarkSearch = urlencode(strtr($shelfmark, $translation));
+            $linksCopiesHAB[] = '<a href="http://opac.lbs-braunschweig.gbv.de/DB=2/SRCH?TRM=sgb+'.$shelfmarkSearch.'" title="Exemplar im OPAC suchen" target="_blank">'.$shelfmark.'</a>';
         }
         return(implode(', ', $linksCopiesHAB));
 }
