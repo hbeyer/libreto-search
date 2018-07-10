@@ -110,8 +110,5 @@ if (!isset($_GET['fuzzy'])) {
             </div>
         </div>
         <?php include('templates/footer.php'); ?>
-        <!-- <footer class="container-fluid">
-            <p><a href="../index.html" style="color:white" target="_blank">Start</a>&nbsp;&nbsp;<a href="http://www.hab.de/de/home/impressum.html" style="color:white" target="_blank">Impressum</a></p>
-        </footer> -->
     </body>
 </html>
