@@ -1,0 +1,47 @@
+<?php
+$title = '';
+if (isset($doc['titleNormalized'][0])) {
+    $title = $doc['titleNormalized'][0];
+}
+elseif (isset($doc['titleBib'][0])) {
+    $title = $doc['titleBib'][0];
+}
+elseif (isset($doc['titleCat'][0])) {
+    $title = $doc['titleCat'][0];
+}
+else {
+    $title = '[Ohne Titel]';
+}
+$authors = '';
+if (isset($doc['author'])) {
+    $authorArray = array();
+    foreach ($doc['author'] as $singleAuthor) {
+        $authorArray[] = explode('#', $singleAuthor)[0];
+    }
+    $authors = implode('/', $authorArray).': ';
+}
+$places = '';
+if (isset($doc['place_1'][0])) {
+    $places = ', '.$doc['place_1'][0];
+    if (isset($doc['place_2'][0])) {
+        $places .= '/'.$doc['place_2'][0];
+    }
+}
+$publisher = '';
+if (isset($doc['publisher_str'][0])) {
+        if ($places == '') {
+            $publisher = ', '.$doc['publisher_str'][0];
+        }
+        else {
+            $publisher = ': '.$doc['publisher_str'][0];            
+        }
+    }
+$year = ', ohne Jahr';
+if (isset($doc['year'][0])) {
+    $year = ', '.$doc['year'][0];
+}
+?>
+<div class="panel-body">
+    <?php echo $authors.$title.$places.$publisher.$year; ?>
+</div>
+
