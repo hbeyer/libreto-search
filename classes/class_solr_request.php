@@ -20,7 +20,8 @@ class solr_request {
         'genres' => 'Gattung', 
         'languagesFull' => 'Sprache', 
         'format' => 'Format',
-        'comment' => 'Kommentar'
+        'comment' => 'Kommentar',
+        'id' => 'ID'
     );
     const FILTER_FIELDS = array(
         'all' => 'Alle',

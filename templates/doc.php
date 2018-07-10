@@ -6,6 +6,7 @@
     </div>
     <div id="collapse<?php echo $countDocs; ?>" class="panel-collapse collapse">
         <div class="panel-body">
+            <div class="row"><div class="col-sm-2"><i>ID</i></div><div class="col-sm-10"><a href="search.php?field=id&value=<?php echo $doc['id']; ?>" title="Permalink auf diesen Datensatz" target="_blank"><?php echo $doc['id']; ?></a></div></div>
 <?php if (isset($doc['author'][0])): ?>
             <div class="row"><div class="col-sm-2"><i>Autor(inn)en</i></div><div class="col-sm-10"><?php $role = 'author'; include('templates/persons.php'); ?></div></div>
 <?php endif;?>

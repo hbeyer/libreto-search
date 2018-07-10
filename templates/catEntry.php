@@ -2,7 +2,7 @@
 <?php if (isset($doc['nameCollection'][0])): ?>
 <div class="row">
     <div class="col-sm-2"><i>Sammlung</i></div>
-    <div class="col-sm-10"><?php echo $doc['nameCollection'][0]; ?><?php if (isset($doc['dateCollection'][0])): ?> (<?php echo $doc['dateCollection'][0]; ?>)<?php endif; ?></div>
+    <div class="col-sm-10"><?php echo $doc['nameCollection'][0]; ?><?php if (isset($doc['dateCollection'][0])): ?> (<?php echo $doc['dateCollection'][0]; ?>)<?php endif; ?><?php if (isset($doc['GeoBrowserLink'][0])): ?> <a href="<?php echo $doc['GeoBrowserLink'][0]; ?>" title="Sammlungsübersicht im GeoBrowser" target="_blank"><span class="glyphicon glyphicon-globe"></span></a><?php endif; ?></div>
 </div>
 <?php endif; ?>
 <?php if (isset($doc['owner'][0])): ?>
