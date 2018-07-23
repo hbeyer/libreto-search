@@ -61,6 +61,11 @@ span.titleCat {
 	display:none; 
 }
 
+/* Formatierung für die Facettierung */
+li.overhang {
+    display:none;
+}
+
 /* Formatierungen für WordClouds */	
 
 div#wordCloudButtons {

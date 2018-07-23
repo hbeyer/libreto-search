@@ -23,7 +23,7 @@ class solr_request {
         'comment' => 'Kommentar',
         'id' => 'ID'
     );
-    const FILTER_FIELDS = array(
+    const FILTERS = array(
         'all' => 'Alle',
         '141678615' => 'Antoinette Amalie von Braunschweig-Wolfenbüttel',
         '128989289' => 'Bahnsen, Benedikt',
@@ -31,6 +31,7 @@ class solr_request {
         '1055708286' => 'Rehlinger, Carl Wolfgang'
     );
     const FACET_FIELDS = array(
+        'nameCollection_str' => 'Sammlung',
         'subjects_str' => 'Inhalte',
         'genres_str' => 'Gattung',
         'languagesFull_str' => 'Sprache',
@@ -119,7 +120,7 @@ class solr_request {
             return(false);
         }
         foreach ($this->filters as $gnd) {
-            if (isset(solr_request::FILTER_FIELDS[$gnd]) == false) {
+            if (isset(solr_request::FILTERS[$gnd]) == false) {
                 return(false);
             }
         }

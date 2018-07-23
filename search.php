@@ -76,7 +76,7 @@ $showFacets = false;
                         <div class="form-group">
                             <select multiple class="form-control" name="owner[]" size="5">
                                 <?php
-                                foreach (solr_request::FILTER_FIELDS as $field => $label) {
+                                foreach (solr_request::FILTERS as $field => $label) {
                                     $selected = '';
                                     if (in_array($field, $_GET['owner'])) {
                                         $selected = ' selected';

@@ -1,20 +1,24 @@
-﻿function toggle(control){
-	var elem = document.getElementById(control);
-	
-	if(elem.style.display == "none"){
-		elem.style.display = "block";
-		minus(control);
-	}else{
-		elem.style.display = "none";
-		plus(control);
-	}
+// Expandieren und Kontrahieren einer Facette
+function expandFacet(id, count) {
+    var ul = document.getElementById(id);
+    var li = ul.getElementsByClassName('overhang');
+    var i;
+    for (i = 0; i < li.length; i++) {
+        li[i].style.display = "block";
+    } 
+    var link = ul.getElementsByClassName('link-expand')[0];
+    link.innerHTML = "<a href=\"javascript:contractFacet('" + id + "', '" + count + "')\">Reduzieren</a>";
 }
 
-function minus(control) {
-    document.getElementById("link" + control).innerHTML = "Reduzieren";
-}
-function plus(control) {
-    document.getElementById("link" + control).innerHTML = "Mehr";
+function contractFacet(id, count) {
+    var ul = document.getElementById(id);
+    var li = ul.getElementsByClassName('overhang');
+    var i;
+    for (i = 0; i < li.length; i++) {
+        li[i].style.display = "none";
+    } 
+    var link = ul.getElementsByClassName('link-expand')[0];
+    link.innerHTML = "<a href=\"javascript:expandFacet('" + id + "', '" + count + "')\">Alle " + count + "</a>";
 }
 
 // Umschalten zwischen bibliographierten Daten und Transkription

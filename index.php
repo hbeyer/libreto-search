@@ -44,7 +44,7 @@ include('templates/functions.php');
 
                 <div class="panel panel-default">
                     <div class="panel-heading">Bibliothek von Benedikt Bahnsen (1670)</div>
-                    <div class="panel-body">Rekonstruktion anhand des gedruckten Auktionskatalogs von Dietrich Hakelberg und Jörn Münkner, unterstützt von Katrin Schmidt<br /><a href="http://localhost/libreto/solr/search.php?field=fullText&value=*&owner%5B%5D=128989289" title="">Anzeigen</a></div>
+                    <div class="panel-body">Rekonstruktion anhand des gedruckten Auktionskatalogs von Dietrich Hakelberg und Jörn Münkner, unterstützt von Katrin Schmidt<br /><a href="http://192.168.0.5/libreto/solr/search.php?field=fullText&value=*&owner%5B%5D=128989289" title="">Anzeigen</a></div>
                 </div>
 
                 <div class="panel panel-default">
