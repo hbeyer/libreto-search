@@ -60,4 +60,14 @@ function replaceUml($string) {
 	return($string);
 }
 
+// Legt fest, ob eine von Solr übermittelte Facette angezeigt werden soll
+function hasMatches($facetArray) {
+    foreach ($facetArray as $value => $count) {
+        if ($count > 0) {
+            return(true);
+        }
+    }
+    return(false);
+}
+
 ?>

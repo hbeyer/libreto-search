@@ -29,8 +29,12 @@ class solr_response {
         return;
     }
 
-    public function displayHTML() {
+    public function displayResults() {
         include('templates/docList.php');
+    }
+
+    public function displayFacets() {
+        include('templates/facets.php');
     }
 
     /* public function buildNewRequest($start = 0) {

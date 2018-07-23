@@ -30,6 +30,13 @@ class solr_request {
         '117671622' => 'Liddel, Duncan',
         '1055708286' => 'Rehlinger, Carl Wolfgang'
     );
+    const FACET_FIELDS = array(
+        'subjects_str' => 'Inhalte',
+        'genres_str' => 'Gattung',
+        'languagesFull_str' => 'Sprache',
+        'format_str' => 'Format',
+        'histSubject_str' => 'Rubrik'
+    );
     
     /*  Variablen für die Suche */
     private $field;
@@ -92,7 +99,13 @@ class solr_request {
             $start = '&start='.$this->start;
         }
         $queryString = 'q='.$field.$this->value;
-        return(solr_request::BASE_SELECT.$filterString.$queryString.$start.'&wt='.solr_request::FORMAT);
+        $facetArray = '';
+        foreach (solr_request::FACET_FIELDS as $field => $label) {
+            $facetArray[] = 'facet.field='.$field;
+        }
+        $facetString = implode('&', $facetArray);
+        $facetString .= '&facet=on&';
+        return(solr_request::BASE_SELECT.$facetString.$filterString.$queryString.$start.'&wt='.solr_request::FORMAT);
     }
 
     private function validate() {

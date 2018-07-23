@@ -15,6 +15,7 @@ if (!isset($_GET['owner'])) {
 if (!isset($_GET['fuzzy'])) {
     $_GET['fuzzy'] = false;
 }
+$showFacets = false;
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -101,11 +102,17 @@ if (!isset($_GET['fuzzy'])) {
                         echo '<div class="alert alert-warning">'.$response->errorMessage.'</div>';
                     }
                     else {
-                        $response->displayHTML();
+                        $response->displayResults();
+                        $showFacets = true;
                     }
                 ?>
                 </div>
                 <div class="col-sm-4">
+                <?php
+                if ($showFacets == true) { 
+                    $response->displayFacets();
+                }
+                ?>
                 </div>
             </div>
         </div>
