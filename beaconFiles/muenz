@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MK-B | Start</title>
   <meta name="description" content="Münzkabinett, Staatliche Museen zu Berlin - Stiftung Preußischer Kulturbesitz" />
-  <meta property="og:type" content="article" />
+  <meta property="og:type" content="website" />
   <meta property="og:title" content="MK-B | Start" />
   <meta property="og:description" content="Münzkabinett der Staatlichen Museen zu Berlin" />
   <meta property="og:url" content="https://ikmk.smb.museum/home" />
@@ -17,6 +17,7 @@
   <meta name="twitter:description" content="Münzkabinett der Staatlichen Museen zu Berlin" /> 
   <meta name="twitter:image" content="https://ikmk.smb.museum/special/favicons/android-chrome-256x256.png" />
 
+  <link rel="shortcut icon" href="https://ikmk.smb.museum/special/favicons/favicon.ico" type="image/x-icon" />
   <link rel="apple-touch-icon" sizes="180x180" href="https://ikmk.smb.museum/special/favicons/apple-touch-icon.png" />
   <link rel="icon" type="image/png" href="https://ikmk.smb.museum/special/favicons/favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="https://ikmk.smb.museum/special/favicons/favicon-16x16.png" sizes="16x16" />
@@ -210,7 +211,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <p><b>Interaktiver Katalog des Münzkabinetts</b></p>
-<ul class="list-unstyled"><li><a href="imprint" title="Impressum">Impressum</a></li><li><a href="security" title="Datenschutz">Datenschutz</a></li></ul>
+<ul class="list-unstyled"><li><a href="imprint" title="Impressum">Impressum</a></li><li><a href="security" title="Datenschutzerklärung">Datenschutzerklärung</a></li></ul>
                 </div>
 <div class="col-sm-4"><p><b>Wir bedanken uns für die Unterstützung bei</b></p><ul class="list-unstyled"><li><a href="http://www.dfg.de" target="_blank" title="dfg.de"><img alt="Logo DFG" class="img-responsive" src="https://ikmk.smb.museum/special/logos/logo_dfg.png"></a></li>
 <li><a href="https://www.bmbf.de" target="_blank" title="bmbf.de"><img alt="Logo BMBF" class="img-responsive" src="https://ikmk.smb.museum/special/logos/logo_bmbf.png"></a></li></ul></div>

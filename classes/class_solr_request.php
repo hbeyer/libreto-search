@@ -40,8 +40,7 @@ class solr_request {
     );
     
     /*  Variablen für die Suche */
-    private $field;
-    private $value;
+    private $queries; // Enthält assoziative Arrays mit den Indices 'field' und 'value'
     private $fuzzy = false;
     private $filters = array();
     private $filterField = 'ownerGND';
@@ -52,8 +51,7 @@ class solr_request {
             $this->start = $get['start'];
         }
         if (isset($get['field']) and isset($get['value'])) {
-            $this->field = htmlspecialchars($get['field']);
-            $this->value = htmlspecialchars($get['value']);
+            $this->queries[] = array('field' => htmlspecialchars($get['field']), 'value' => htmlspecialchars($get['value']));
             if (isset($get['fuzzy'])) {
                 if ($get['fuzzy'] == 'yes') {
                     $this->fuzzy = true;
@@ -65,15 +63,27 @@ class solr_request {
                         $this->filters[] = $gnd;
                     }
                 }
-            }        
+            }
+
+            if (isset($get['refine'])) {
+                foreach ($get['refine'] as $refine) {
+                    $keyValue = explode(':', $refine);
+                    if (isset($keyValue[0]) and isset($keyValue[1])) {
+                        $this->queries[] = array('field' =>  htmlspecialchars($keyValue[0]), 'value' => htmlspecialchars($keyValue[1]));
+                    }
+                }
+            }
+        
         }
         $this->url = $this->toURL();
     }
 
     private function toURL() {
+
         if ($this->validate() == false) {
             return;
         }
+                
         $filterString = '';
         if (isset($this->filters[0])) {
             $filters = array();
@@ -82,39 +92,53 @@ class solr_request {
             }
             $filterString = 'fq='.implode(urlencode(' OR '), $filters).'&';
         }
-        $field = '';
-        if ($this->field != 'fullText') {
-            $field = $this->field.':';        }
-        $this->value = urlencode($this->value);
-        if ($this->value == '') {
-            $this->value = '*';
+
+        $queryArray = array();
+        foreach ($this->queries as $query) {
+            $query['value'] = urlencode($query['value']);
+            if ($query['value'] == '') {
+                $query['value'] = '*';
+            }        
+            if ($query['field'] == 'fullText') {
+                $queryArray[] = $query['value'];
+            }
+            else {
+                $queryArray[] = $query['field'].':'.$query['value'];
+            }
         }
-        elseif ($this->fuzzy == true and $this->field != 'yearNormalized') {
+        $queryString = 'q='.implode('+AND+', $queryArray);
+        
+        if ($this->fuzzy == true and $this->field != 'yearNormalized') {
             if (substr($this->value, -1) == '*') {
                 $this->value = substr($this->value, 0, -1);
             }
             $this->value .= '~';
         }
+
         $start = '';
         if ($this->start > 0) {
             $start = '&start='.$this->start;
         }
-        $queryString = 'q='.$field.$this->value;
+
         $facetArray = '';
         foreach (solr_request::FACET_FIELDS as $field => $label) {
             $facetArray[] = 'facet.field='.$field;
         }
         $facetString = implode('&', $facetArray);
         $facetString .= '&facet=on&';
+
         return(solr_request::BASE_SELECT.$facetString.$filterString.$queryString.$start.'&wt='.solr_request::FORMAT);
+
     }
 
     private function validate() {
-        if (isset(solr_request::SEARCH_FIELDS[$this->field]) == false) {
-            return(false);        
-        }
-        if (strlen($this->value) > 150) {
-            return(false);
+        foreach ($this->queries as $query) {
+            if (isset(solr_request::SEARCH_FIELDS[$query['field']]) == false and isset(solr_request::FACET_FIELDS[$query['field']]) == false) {
+                return(false);
+            }
+            if (strlen($query['value']) > 150) {
+                return(false);
+            }
         }
         if ($this->fuzzy != false and $this->fuzzy != 'yes') {
             return(false);

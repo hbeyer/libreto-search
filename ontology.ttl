@@ -1,4 +1,4 @@
-@prefix br: <http://dev.hab.de/bibliotheksrekonstruktion/> .
+@prefix libreto: <http://bibliotheksrekonstruktion.hab.de/ontology.php#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix gndo: <http://d-nb.info/standards/elementset/gnd#> .
@@ -8,268 +8,268 @@
 @prefix dbo: <http://dbpedia.org/ontology/> .
 @prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 
-br:ontology.html#Catalogue
+libreto:Catalogue
   a owl:Class ;
   rdfs:label "Catalogue"@en, "Altkatalog"@de ;
   rdfs:comment "Ein Katalog, der zur Zusammensetzung einer Sammlung zu einem bestimmten Zeitpunkt Auskunft gibt"@de .
 
-br:ontology.html#CatalogueEntry
+libreto:CatalogueEntry
   a owl:Class ;
   rdfs:label "Entry"@en, "Eintrag"@de ;
   rdfs:comment "Ein Eintrag im Katalog, der ein Sammlungsobjekt der Sammlung zuordnet"@de .
 
-br:ontology.html#Collection
+libreto:Collection
   a owl:Class ;
   rdfs:label "Collection"@en, "Sammlung"@de ;
   rdfs:comment "Eine erhaltene oder zu einem bestimmten Zeitpunkt in der Vergangenheit existente Bibliothek oder ähnliche Sammlung"@de .
 
-br:ontology.html#Item
+libreto:Item
   a owl:Class ;
   rdfs:label "Item"@en, "Sammlungsobjekt"@de ;
   rdfs:comment "Ein Sammlungsobjekt wie Druck, Handschrift, Kunstwerk etc."@de .
 
-br:ontology.html#Manifestation
+libreto:Manifestation
   a owl:Class ;
   rdfs:label "Manifestation"@en, "Ausgabe"@de ;
   rdfs:comment "Ausgabe eines gedruckten Werkes, die in einer Bibliographie nachgewiesen ist"@de .
 
-br:ontology.html#Miscellany
+libreto:Miscellany
   a owl:Class ;
   rdfs:label "Miscellany"@en, "Sammelband"@de ;
   rdfs:comment "Ein Band, in dem mehrere Sammlungsobjekte physisch verbunden sind"@de .
 
-br:ontology.html#OriginalItem
+libreto:OriginalItem
   a owl:Class ;
   rdfs:label "Copy"@en, "Exemplar"@de ;
   rdfs:comment "Das konkrete Sammlungsobjekt, wenn es erhalten und identifizierbar ist"@de .
 
-br:ontology.html#Person
+libreto:Person
   a owl:Class ;
   rdfs:label "Person"@en, "Person"@de ;
   owl:sameAs gndo:DifferentiatedPerson, foaf:Person .
 
-br:ontology.html#PhysicalContext
+libreto:PhysicalContext
   a owl:Class ;
   rdfs:label "Physical Context"@en, "Materieller Kontext"@de ;
   rdfs:comment "Zugehörigkeit des Sammlungsobjekts zu einem materiellen Verbund, insbesondere einem Sammelband"@de .
 
-br:ontology.html#Place
+libreto:Place
   a owl:Class ;
   rdfs:label "Place"@en, "Ort"@de ;
   owl:sameAs gn:Feature, gndo:TerritorialCorporateBodyOrAdministrativeUnit .
 
-br:ontology.html#Work
+libreto:Work
   a owl:Class ;
   rdfs:label "Work"@en, "Werk"@de ;
   rdfs:comment "Ein Werk als geistige Schöpfung, das in einem Sammlungsobjekt vorliegen kann"@de .
 
-br:ontology.html#belongsTo
+libreto:belongsTo
   a owl:ObjectProperty ;
-  rdfs:domain br:ontology.html#Item ;
-  rdfs:range br:ontology.html#Collection ;
+  rdfs:domain libreto:Item ;
+  rdfs:range libreto:Collection ;
   rdfs:comment "Zuordnung eines Sammlungsobjekts (Buch, Handschrift, Bild o. a.) zu einer Sammlung"@de .
 
-br:ontology.html#collector
+libreto:collector
   a owl:ObjectProperty ;
-  rdfs:domain br:ontology.html#Person ;
-  rdfs:range br:ontology.html#Collection ;
+  rdfs:domain libreto:Person ;
+  rdfs:range libreto:Collection ;
   rdfs:comment "Zuordnung einer Person als Sammler/in zu einer Sammlung"@de .
 
-br:ontology.html#containsWork
+libreto:containsWork
   a owl:ObjectProperty ;
-  rdfs:domain br:ontology.html#Item ;
-  rdfs:range br:ontology.html#Work ;
+  rdfs:domain libreto:Item ;
+  rdfs:range libreto:Work ;
   rdfs:comment "Angabe, dass ein Sammlungsobjekt ein Werk enthält"@de .
 
-br:ontology.html#hasContext
+libreto:hasContext
   a owl:ObjectProperty ;
-  rdfs:range br:ontology.html#Item ;
-  rdfs:domain br:ontology.html#PhysicalContext ;
+  rdfs:range libreto:Item ;
+  rdfs:domain libreto:PhysicalContext ;
   rdfs:comment "Angabe des physischen Kontextes eines Sammlungsobjekts"@de .
 
-br:ontology.html#hasEntry
+libreto:hasEntry
   a owl:ObjectProperty ;
-  rdfs:range br:ontology.html#CatalogueEntry ;
-  rdfs:domain br:ontology.html#Catalogue ;
+  rdfs:range libreto:CatalogueEntry ;
+  rdfs:domain libreto:Catalogue ;
   rdfs:comment "Angabe, dass ein Katalog einer Sammlung einen Eintrag enthält, der über ein Sammlungsobjekt Auskunft gibt"@de .
 
-br:ontology.html#hasManifestation
+libreto:hasManifestation
   a owl:ObjectProperty ;
-  rdfs:domain br:ontology.html#Item ;
-  rdfs:range br:ontology.html#Manifestation ;
+  rdfs:domain libreto:Item ;
+  rdfs:range libreto:Manifestation ;
   rdfs:comment "Angabe, dass ein Sammlungsobjekt eine bibliographisch nachgewiesene Ausgabe enthält"@de .
 
-br:ontology.html#hasOriginalItem
+libreto:hasOriginalItem
   a owl:ObjectProperty ;
-  rdfs:domain br:ontology.html#Item ;
-  rdfs:range br:ontology.html#OriginalItem ;
+  rdfs:domain libreto:Item ;
+  rdfs:range libreto:OriginalItem ;
   rdfs:comment "Angabe, dass ein Sammlungsobjekt mit einem konkreten, mit Institution und Signatur/Inventarnummer identifizierbaren Objekt identisch ist"@de .
 
-br:ontology.html#hasPlace
+libreto:hasPlace
   a owl:ObjectProperty ;
-  rdfs:domain br:ontology.html#Item ;
-  rdfs:range br:ontology.html#Place ;
+  rdfs:domain libreto:Item ;
+  rdfs:range libreto:Place ;
   rdfs:comment "Zuordnung eines Publikationsortes zu einem Sammlungsobjekt"@de .
 
-br:ontology.html#inMiscellany
+libreto:inMiscellany
   a owl:ObjectProperty ;
-  rdfs:range br:ontology.html#PhysicalContext ;
-  rdfs:domain br:ontology.html#Miscellany ;
+  rdfs:range libreto:PhysicalContext ;
+  rdfs:domain libreto:Miscellany ;
   rdfs:comment "Zuordnung eines Sammelbandes zum physischen Kontext eines Objekts"@de .
 
-br:ontology.html#refersTo
+libreto:refersTo
   a owl:ObjectProperty ;
-  rdfs:domain br:ontology.html#CatalogueEntry ;
-  rdfs:range br:ontology.html#Item ;
+  rdfs:domain libreto:CatalogueEntry ;
+  rdfs:range libreto:Item ;
   rdfs:comment "Zuordnung eines Sammlungsobjekts zu einem Katalogeintrag"@de .
 
 dc:creator
   a owl:ObjectProperty ;
-  rdfs:domain br:ontology.html#Person ;
-  rdfs:range br:ontology.html#Item .
+  rdfs:domain libreto:Person ;
+  rdfs:range libreto:Item .
 
 dc:contributor
   a owl:ObjectProperty ;
-  rdfs:domain br:ontology.html#Person ;
-  rdfs:range br:ontology.html#Item .
+  rdfs:domain libreto:Person ;
+  rdfs:range libreto:Item .
 
-br:ontology.html#bibliographicalFormat
+libreto:bibliographicalFormat
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Item ;
+  rdfs:domain libreto:Item ;
   rdfs:comment "Das bibliographische Format (Folio, Quart etc.) eines Buches"@de .
 
-br:ontology.html#biographicalInformation
+libreto:biographicalInformation
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Person ;
+  rdfs:domain libreto:Person ;
   rdfs:comment "Ein Link zu einer Ressource, die biographische Informationen zu einer Person enthält"@de .
 
-br:ontology.html#comment
+libreto:comment
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Item ;
+  rdfs:domain libreto:Item ;
   rdfs:comment "Erklärungstext zu einem Sammlungsobjekt, der u. a. Probleme bei der Zuordnung von Ausgaben und Originalexemplaren thematisieren kann"@de .
 
-br:ontology.html#database
+libreto:database
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Manifestation ;
+  rdfs:domain libreto:Manifestation ;
   rdfs:comment "Eine bibliographische Datenbank, in der eine Ausgabe verzeichnet ist"@de .
 
-br:ontology.html#heading
+libreto:heading
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#CatalogueEntry ;
+  rdfs:domain libreto:CatalogueEntry ;
   rdfs:comment "Rubrik des Altkatalogs, unter der der Eintrag geführt wird"@de .
 
-br:ontology.html#historicalShelfmark
+libreto:historicalShelfmark
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Item ;
+  rdfs:domain libreto:Item ;
   rdfs:comment "Eine Signatur, unter der das Sammlungsobjekt in der rekonstruierten Sammlung geführt wurde"@de .
 
-br:ontology.html#imageURL
+libreto:imageURL
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#CatalogueEntry ;
+  rdfs:domain libreto:CatalogueEntry ;
   rdfs:comment "Link zu einem Digitalisat der Seite, auf der der Katalogeintrag steht"@de .
 
-br:ontology.html#number
+libreto:number
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#CatalogueEntry ;
+  rdfs:domain libreto:CatalogueEntry ;
   rdfs:comment "Die Nummer eines Katalogeintrags in Vorlageform"@de .
 
-br:ontology.html#owner
+libreto:owner
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Catalogue, br:ontology.html#OriginalItem ;
+  rdfs:domain libreto:Catalogue, libreto:OriginalItem ;
   rdfs:comment "Institution oder Person, die ein mit Signatur identifizierbares Sammlungsobjekt besitzt"@de .
 
-br:ontology.html#page
+libreto:page
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#CatalogueEntry ;
+  rdfs:domain libreto:CatalogueEntry ;
   rdfs:comment "Die Seite, auf der sich ein bestimmter Textabschnitt befindet"@de .
 
-br:ontology.html#physicalForm
+libreto:physicalForm
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Item ;
+  rdfs:domain libreto:Item ;
   rdfs:comment "Angabe ob gebunden oder ungebunden"@de .
 
-br:ontology.html#position
+libreto:position
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#PhysicalContext ;
+  rdfs:domain libreto:PhysicalContext ;
   rdfs:comment "Die numerische Position eines Sammlungsobjektes in einem größeren Verbund, insbesondere einem Sammelband"@de .
 
-br:ontology.html#provenanceAttribute
+libreto:provenanceAttribute
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#OriginalItem ;
+  rdfs:domain libreto:OriginalItem ;
   rdfs:comment "Merkmale eines erhaltenen Objekts, die auf die Zugehörigkeit zu einer historischen Sammlung hindeuten"@de .
 
-br:ontology.html#shelfmark
+libreto:shelfmark
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Catalogue, br:ontology.html#OriginalItem ;
+  rdfs:domain libreto:Catalogue, libreto:OriginalItem ;
   rdfs:comment "Die Signatur eines mit Signatur identifizierbaren Objekts im Bestand der besitzenden Person oder Institution"@de .
 
-br:ontology.html#text
+libreto:text
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#CatalogueEntry ;
+  rdfs:domain libreto:CatalogueEntry ;
   rdfs:comment "Wörtliche Wiedergabe eines Katalogeintrags, der neben bibliographischen Angaben auch weitere Informationen zum Sammlungsobjekt (Bindung, Zustand, Herkunft) enthalten kann"@de .
 
 dbo:genre
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Item .
+  rdfs:domain libreto:Item .
 
 dbo:numberOfVolumes
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Item, br:ontology.html#Miscellany .
+  rdfs:domain libreto:Item, libreto:Miscellany .
 
 dc:date
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Collection, br:ontology.html#Catalogue, br:ontology.html#Item .
+  rdfs:domain libreto:Collection, libreto:Catalogue, libreto:Item .
 
 dc:description
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Collection .
+  rdfs:domain libreto:Collection .
 
 dc:hasFormat
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Item, br:ontology.html#OriginalItem ;
+  rdfs:domain libreto:Item, libreto:OriginalItem ;
   rdfs:comment "Link zum Digitalisat"@de .
 
 dc:identifier
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Place, br:ontology.html#Manifestation .
+  rdfs:domain libreto:Place, libreto:Manifestation .
 
 dc:language
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Item .
+  rdfs:domain libreto:Item .
 
 dc:publisher
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Item .
+  rdfs:domain libreto:Item .
 
 dc:subject
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Item .
+  rdfs:domain libreto:Item .
 
 dc:title
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Collection, br:ontology.html#Item, br:ontology.html#Catalogue, br:ontology.html#Work .
+  rdfs:domain libreto:Collection, libreto:Item, libreto:Catalogue, libreto:Work .
 
 dc:type
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Item .
+  rdfs:domain libreto:Item .
 
 foaf:name
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Person .
+  rdfs:domain libreto:Person .
 
 foaf:gender
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Person .
+  rdfs:domain libreto:Person .
 
 gn:name
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Place .
+  rdfs:domain libreto:Place .
 
 geo:lat
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Place .
+  rdfs:domain libreto:Place .
 
 geo:long
   a owl:DatatypeProperty ;
-  rdfs:domain br:ontology.html#Place .
+  rdfs:domain libreto:Place .
 

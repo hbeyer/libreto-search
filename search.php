@@ -15,6 +15,9 @@ if (!isset($_GET['owner'])) {
 if (!isset($_GET['fuzzy'])) {
     $_GET['fuzzy'] = false;
 }
+if (!isset($_GET['refine'])) {
+    $_GET['refine'] = array();
+}
 $showFacets = false;
 ?>
 <!DOCTYPE html>
@@ -48,9 +51,9 @@ $showFacets = false;
                                 <select name="field" style="height:32px;">
                                     <?php
                                     foreach (solr_request::SEARCH_FIELDS as $field => $label) {
-                                    $selected = '';
-                                    if ($_GET['field'] == $field) {
-                                    $selected = ' selected';
+                                        $selected = '';
+                                        if ($_GET['field'] == $field) {
+                                        $selected = ' selected';
                                     }
                                     echo '<option value="'.$field.'"'.$selected.'>'.$label.'</option>';
                                     }

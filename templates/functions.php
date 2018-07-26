@@ -4,7 +4,7 @@ function makeNavigation() {
     $categories = array(
         'index.php' => array('label' => 'Home', 'active' =>  ''),
         'search.php' => array('label' => 'Suchmaschine', 'active' =>  ''),
-        'ontology.html' => array('label' => 'Ontologie', 'active' =>  '')
+        'ontology.php' => array('label' => 'Ontologie', 'active' =>  '')
     );
 
     $chunks = explode('/', $_SERVER['SCRIPT_FILENAME']);
