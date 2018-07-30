@@ -1,6 +1,6 @@
 <?php foreach ($this->responsePHP['facet_counts']['facet_fields'] as $field => $facetArray): ?>
 <?php if (hasMatches($facetArray) == true): ?>
-                <h4><?php echo solr_request::FACET_FIELDS[$field]; ?></h4>
+                <h4><?php echo solr_request::FACET_FIELDS[$field]; ?> <i class="fas fa-dot-circle"></i></h4>
                 <ul id="facet-<?php echo $field; ?>">
 <?php 
     $count = 0;
@@ -15,7 +15,7 @@
     }
     $count++;
 ?>
-                    <li<?php echo $class; ?>><?php echo $value; ?> <span class="badge"><?php echo $hits; ?></span></li>
+                    <li<?php echo $class; ?>><a href="<?php echo $this->buildFacetLink($field.':'.$value); ?>" class="facetLink"><?php echo $value; ?></a> <span class="badge"><?php echo $hits; ?></span></li>
 <?php endif; ?>
 <?php endforeach; ?>
 <?php if ($class != ''): ?>

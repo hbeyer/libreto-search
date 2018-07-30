@@ -19,6 +19,7 @@ if (!isset($_GET['refine'])) {
     $_GET['refine'] = array();
 }
 $showFacets = false;
+$request = new solr_request($_GET);
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -97,7 +98,6 @@ $showFacets = false;
             <div class="row">
                 <div class="col-sm-8">
                 <?php
-                    $request = new solr_request($_GET);
                     if ($request->url) {
                         $response = new solr_response($request->url);
                     }

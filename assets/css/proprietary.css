@@ -65,6 +65,9 @@ span.titleCat {
 li.overhang {
     display:none;
 }
+a.facetLink {
+    color:#515151;
+    }
 
 /* Formatierungen für WordClouds */	
 

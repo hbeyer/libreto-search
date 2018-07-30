@@ -37,22 +37,7 @@ class solr_response {
         include('templates/facets.php');
     }
 
-    /* public function buildNewRequest($start = 0) {
-        $result = solr_request::BASE_SELECT;
-        if (isset($this->responsePHP['responseHeader']['params']['q'])) {
-            if (isset($this->responsePHP['responseHeader']['params']['fq'])) {
-                $result .= 'fq='.$this->responsePHP['responseHeader']['params']['fq'].'&';
-            }
-            $result .= 'q='.$this->responsePHP['responseHeader']['params']['q'];
-            if ($start >  0) {
-                $result .= '&start='.$start;
-            }
-            $result .= '&wq='.solr_request::FORMAT;
-        }
-        return($result);
-    } */
-
-    public function buildNewGETRequest($start) {
+    private function buildGETRequest() {
         $result = 'search.php?';
         $result .= 'field='.$_GET['field'].'&';
         $result .= 'value='.$_GET['value'].'&';
@@ -62,9 +47,37 @@ class solr_response {
         foreach ($_GET['owner'] as $gnd) {
             $result .= 'owner[]='.$gnd.'&';
         }
-        $result .= 'start='.$start;
+        $refines = array_unique($_GET['refine']);
+        foreach ($refines as $refine) {          
+            $result .= 'refine[]='.$refine.'&';
+        }
+        $result = rtrim($result, '&');
         return($result);
     }
+
+    public function buildPaginationLink($start) {
+        $result = $this->buildGETRequest();
+        $result .= '&start='.$start;
+        return($result);
+    }
+
+    public function buildFacetLink($addRefine) {
+        if (in_array($addRefine, $_GET['refine'])) {
+            return('#');
+        }
+        $result = $this->buildGETRequest();
+        $result .= '&refine[]='.$addRefine;
+        return($result);
+    }
+    
+    public function removeRefineLink($removeRefine) {
+        $result = $this->buildGETRequest();
+        $translate = array('&refine[]='.$removeRefine => '');
+        $result = strtr($result, $translate);
+        $result = rtrim($result, '&');
+        return($result);
+    }
+    
 }
 
 ?>

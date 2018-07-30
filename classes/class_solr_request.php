@@ -69,7 +69,7 @@ class solr_request {
                 foreach ($get['refine'] as $refine) {
                     $keyValue = explode(':', $refine);
                     if (isset($keyValue[0]) and isset($keyValue[1])) {
-                        $this->queries[] = array('field' =>  htmlspecialchars($keyValue[0]), 'value' => htmlspecialchars($keyValue[1]));
+                        $this->queries[] = array('field' =>  htmlspecialchars($keyValue[0]), 'value' => '"'.htmlspecialchars($keyValue[1]).'"');
                     }
                 }
             }
