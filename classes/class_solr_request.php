@@ -3,7 +3,9 @@
 
 class solr_request {
     
-    public $url = '';    
+    public $url = '';
+    public $errorMessage;
+   
     const BASE_SELECT = 'http://192.168.0.5:8983/solr/libreto/select?';
     const FORMAT = 'php';
     const SEARCH_FIELDS = array(
@@ -23,6 +25,7 @@ class solr_request {
         'comment' => 'Kommentar',
         'id' => 'ID'
     );
+    const FILTER_FIELD = 'ownerGND';
     const FILTERS = array(
         'all' => 'Alle',
         '141678615' => 'Antoinette Amalie von Braunschweig-Wolfenbüttel',
@@ -36,14 +39,13 @@ class solr_request {
         'genres_str' => 'Gattung',
         'languagesFull_str' => 'Sprache',
         'format_str' => 'Format',
-        'histSubject_str' => 'Rubrik'
+        'histSubject_str' => 'Rubrik',
+        'publisher_str' => 'Drucker(in)'
     );
     
     /*  Variablen für die Suche */
     private $queries; // Enthält assoziative Arrays mit den Indices 'field' und 'value'
-    private $fuzzy = false;
     private $filters = array();
-    private $filterField = 'ownerGND';
     private $start = 0;
 
     function __construct($get) {
@@ -51,12 +53,12 @@ class solr_request {
             $this->start = $get['start'];
         }
         if (isset($get['field']) and isset($get['value'])) {
-            $this->queries[] = array('field' => htmlspecialchars($get['field']), 'value' => htmlspecialchars($get['value']));
-            if (isset($get['fuzzy'])) {
-                if ($get['fuzzy'] == 'yes') {
-                    $this->fuzzy = true;
-                }
+            $value = htmlspecialchars($get['value']);
+            if ($get['fuzzy'] == 'yes' and $value != '*' and $value != '') {
+                $value = rtrim('*', $value);
+                $value .= '~';
             }
+            $this->queries[] = array('field' => htmlspecialchars($get['field']), 'value' => $value);
             if (isset($get['owner'])) {
                 if (in_array('all', $get['owner']) == false)  {
                     foreach ($get['owner'] as $gnd) {
@@ -88,7 +90,7 @@ class solr_request {
         if (isset($this->filters[0])) {
             $filters = array();
             foreach ($this->filters as $gnd) {
-                $filters[] = $this->filterField.':'.$gnd;
+                $filters[] = solr_request::FILTER_FIELD.':'.$gnd;
             }
             $filterString = 'fq='.implode(urlencode(' OR '), $filters).'&';
         }
@@ -107,13 +109,6 @@ class solr_request {
             }
         }
         $queryString = 'q='.implode('+AND+', $queryArray);
-        
-        if ($this->fuzzy == true and $this->field != 'yearNormalized') {
-            if (substr($this->value, -1) == '*') {
-                $this->value = substr($this->value, 0, -1);
-            }
-            $this->value .= '~';
-        }
 
         $start = '';
         if ($this->start > 0) {
@@ -134,17 +129,17 @@ class solr_request {
     private function validate() {
         foreach ($this->queries as $query) {
             if (isset(solr_request::SEARCH_FIELDS[$query['field']]) == false and isset(solr_request::FACET_FIELDS[$query['field']]) == false) {
+                $this->errorMessage = 'Ungültiges Feld: '.$query['field'];
                 return(false);
             }
             if (strlen($query['value']) > 150) {
+                $this->errorMessage = 'Suchwort zu lang (maximal 150 Zeichen)';
                 return(false);
             }
         }
-        if ($this->fuzzy != false and $this->fuzzy != 'yes') {
-            return(false);
-        }
         foreach ($this->filters as $gnd) {
             if (isset(solr_request::FILTERS[$gnd]) == false) {
+                $this->errorMessage = 'Unzulässiger Filter: '.$gnd;
                 return(false);
             }
         }

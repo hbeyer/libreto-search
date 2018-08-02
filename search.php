@@ -98,15 +98,18 @@ $request = new solr_request($_GET);
             <div class="row">
                 <div class="col-sm-8">
                 <?php
-                    if ($request->url) {
+                    if ($request->errorMessage) {
+                        echo '<div class="alert alert-warning">'.$request->errorMessage.'</div>';
+                    }
+                    elseif ($request->url) {
                         $response = new solr_response($request->url);
-                    }
-                    if ($response->errorMessage) {
-                        echo '<div class="alert alert-warning">'.$response->errorMessage.'</div>';
-                    }
-                    else {
-                        $response->displayResults();
-                        $showFacets = true;
+                        if ($response->errorMessage) {
+                            echo '<div class="alert alert-warning">'.$response->errorMessage.'</div>';
+                        }
+                        else {
+                            $response->displayResults();
+                            $showFacets = true;
+                        }
                     }
                 ?>
                 </div>
