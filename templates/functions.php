@@ -70,4 +70,12 @@ function hasMatches($facetArray) {
     return(false);
 }
 
+function displayRefine($refine, $removeLink) {
+        $explode = explode(':', $refine);
+        $field = array_shift($explode);
+        $value = implode($explode);
+        $line = solr_request::FACET_FIELDS[$field].': '.$value.' <a href="'.$removeLink.'" class="link-glyphicon" title="Diese Einschränkung aufheben"><span class="glyphicon glyphicon-remove"></span></a>';
+        return($line);
+    }
+
 ?>

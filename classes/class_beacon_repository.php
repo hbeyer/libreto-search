@@ -14,6 +14,8 @@ class beacon_repository {
         'dbi' => array('label' => 'Dizionario Biografico degli Italiani', 'location' => 'http://beacon.findbuch.de/downloads/patchwork/pw_dbi-gndbeacon.txt', 'target' => 'http://beacon.findbuch.de/gnd-resolver/pw_dbi/{ID}'),
         'hls' => array('label' => 'Historisches Lexikon der Schweiz', 'location' => 'http://beacon.findbuch.de/downloads/hls/hls-pndbeacon.txt', 'target' => 'http://beacon.findbuch.de/pnd-resolver/hls/{ID}'),		
         'blko' => array('label' => 'Biographisches Lexikon des Kaiserthums Oesterreich', 'location' => 'http://tools.wmflabs.org/persondata/beacon/dewikisource_blkoe.txt', 'target' => 'http://tools.wmflabs.org/persondata/redirect/gnd/ws-blkoe/{ID}'),
+        'blgs' => array('label' => 'Biographisches Lexikon zur Geschichte Südosteuropas', 'location' => 'https://www.biolex.ios-regensburg.de/beacon.txt', 'target' => 'http://www.biolex.ios-regensburg.de/BioLexViewlist.php?x_dnb={ID}&z_dnb=LIKE&cmd=search'),
+        'phoh' => array('label' => 'Personendatenbank der Höflinge der österreichischen Habsburger', 'location' => 'http://kaiserhof.geschichte.lmu.de/beacon/', 'target' => 'http://kaiserhof.geschichte.lmu.de/Q/GND={ID}'),
         'pbbl' => array('label' => 'Personen in bayrischen historischen biographischen Lexika', 'location' => 'http://www.historische-kommission-muenchen-editionen.de/beacond/bsb_personen.php?beacon', 'target' => 'http://personen.digitale-sammlungen.de/pnd/treffer.html?object=liste&suche=pndid:{ID}%20AND%20(bsbID:bsb00000273%20OR%20bsbID:bsb00000274%20OR%20bsbID:bsb00000279%20OR%20bsbID:bsb00000280%20OR%20bsbID:bsb00000281%20OR%20bsbID:bsb00000282%20OR%20bsbID:bsb00000283%20OR%20bsbID:bsb00000284)&pos=1'),
     	'bwbio' => array('label' => 'Biografische Sammelwerke Baden-Württemberg', 'location' => 'http://www.leo-bw.de/documents/10157/0/leo-bw-beacon_kgl_bio.txt', 'target' => 'http://www.leo-bw.de/web/guest/detail/-/Detail/details/PERSON/kgl_biographien/{ID}/biografie'),
     	'hbio' => array('label' => 'Hessische Biografie', 'location' => 'http://www.lagis-hessen.de/gnd.txt', 'target' => 'http://www.lagis-hessen.de/pnd/{ID}'),
@@ -22,11 +24,15 @@ class beacon_repository {
     	'wfg' => array('label' => 'Westfälische Geschichte', 'location' => 'http://www.lwl.org/westfaelische-geschichte/meta/pnd.txt', 'target' => 'http://www.westfaelische-geschichte.de/pnd{ID}'),
         'trithemius' => array('label' => 'Trithemius: De scriptoribus ecclesiasticis', 'location' => 'http://www.mgh-bibliothek.de/beacon/trithemius', 'target' => 'http://www.mgh.de/index.php?&wa72ci_url=%2Fcgi-bin%2Fmgh%2Fallegro.pl&db=opac&var5=IDN&TYP=&id=438&item5=trithemius_{ID}'),
         'fabricius' => array('label' => 'Fabricius: Bibliotheca latina', 'location' => 'http://www.mgh-bibliothek.de/beacon/fabricius', 'target' => 'http://www.mgh.de/index.php?&wa72ci_url=%2Fcgi-bin%2Fmgh%2Fallegro.pl&db=opac&var5=IDN&TYP=&id=438&item5=fabricius_{ID}'),
+        'mav' => array('label' => 'Melchior Adam: Vitae', 'location' => 'http://www.historische-kommission-muenchen-editionen.de/beacond/adam.php?beacon', 'target' => 'http://www.historische-kommission-muenchen-editionen.de/beacond/adam.php?pnd={ID}'),
+'jen' => array('label' => 'Jewish Encyclopedia 1906', 'location' => 'http://www.historische-kommission-muenchen-editionen.de/beacond/jewishenc.php?beacon', 'target' => 'http://www.historische-kommission-muenchen-editionen.de/beacond/jewishenc.php?pnd={ID}'),
         'gspd' => array('label' => 'Germania Sacra Personendatenbank', 'location' => 'http://personendatenbank.germania-sacra.de/beacon.txt', 'target' => 'http://personendatenbank.germania-sacra.de/index/gnd/{ID}'),	
+        'hpk' => array('label' => 'Hamburger Professorinnen- und Professorenkatalog', 'location' => 'https://www.hpk.uni-hamburg.de/hpk_gnd_beacon.txt', 'target' => 'https://www.hpk.uni-hamburg.de/resolve/gnd/{ID}'),
         'cph' => array('label' => 'Helmstedter Professorenkatalog', 'location' => 'http://uni-helmstedt.hab.de/beacon.php', 'target' => 'http://uni-helmstedt.hab.de/index.php?cPage=5&sPage=prof&wWidth=1920&wHeight=957&suche1=gnd&pnd1=&muster1={ID}'),		
         'cpr' => array('label' => 'Rostocker Professorenkatalog', 'location' => 'http://cpr.uni-rostock.de/cpr_pnd_beacon.txt', 'target' => 'http://cpr.uni-rostock.de/pnd/{ID}'),		
         'cpl' => array('label' => 'Leipziger Professorenkatalog', 'location' => 'http://www.uni-leipzig.de/unigeschichte/professorenkatalog/leipzig/cpl-beacon.txt', 'target' => 'http://www.uni-leipzig.de/unigeschichte/professorenkatalog/leipzig/pnd/{ID}'),
         'cpm' => array('label' => 'Catalogus Professorum der Universität Mainz', 'location' => 'http://gutenberg-biographics.ub.uni-mainz.de/gnd/personen/beacon/file.txt', 'target' => 'http://gutenberg-biographics.ub.uni-mainz.de/gnd/{ID}'),
+        'mpo' => array('label' => 'Marburger Professorenkatalog online', 'location' => 'https://www.lagis-hessen.de/pkat_mr.txt', 'target' =>  'https://www.uni-marburg.de/uniarchiv/pkat/gnd?id={ID}'),
         'cprm' => array('label' => 'Matrikel der Universität Rostock', 'location' => 'http://matrikel.uni-rostock.de/matrikel_rostock_pnd_beacon.txt', 'target' => 'http://matrikel.uni-rostock.de/gnd/{ID}'),
         'hvuz' => array('label' => 'Historische Vorlesungsverzeichnisse der Universität Zürich 1833–1900', 'location' => 'http://histvv.uzh.ch/pnd.txt', 'target' => 'http://histvv.uzh.ch/pnd/{ID}'),
         'mabk' => array('label' => 'Matrikel der Akademie der Bildenden Künste München', 'location' => 'http://www.historische-kommission-muenchen-editionen.de/beacond/adbk.php?beacon', 'target' => 'http://www.historische-kommission-muenchen-editionen.de/beacond/adbk.php?pnd={ID}'),	
@@ -45,6 +51,8 @@ class beacon_repository {
         'cmvw' => array('label' => 'Carl Maria von Weber Gesamtausgabe (WeGA)', 'location' => 'http://weber-gesamtausgabe.de/pnd_beacon.txt', 'target' => 'http://www.weber-gesamtausgabe.de/de/pnd/{ID}'),
         'cfgb' => array('label' => 'Carl Friedrich Gauss Briefwechsel', 'location' => 'http://www.historische-kommission-muenchen-editionen.de/beacond/gauss.php?beacon', 'target' => 'http://www.historische-kommission-muenchen-editionen.de/beacond/gauss.php?pnd={ID}')	
     );
+
+// '' => array('label' => '', 'location' => '', 'target' => ''),
 
     function __construct() {
         if ($this->validate() == false) {

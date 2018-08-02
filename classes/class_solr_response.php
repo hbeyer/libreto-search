@@ -34,8 +34,26 @@ class solr_response {
     }
 
     public function displayFacets() {
+        if ($_GET['refine'] != array()) {
+            if ($this->validateRefine($_GET['refine']) == true) {
+                include('templates/refines.php');
+            }
+        }
         include('templates/facets.php');
     }
+
+    private function validateRefine($refines) {
+            foreach ($refines as $refine) {
+                $explode = explode(':', $refine);
+                if (!isset($explode[0]) or !isset($explode[1])) {
+                    return(false);
+                }
+                if (!isset(solr_request::FACET_FIELDS[$explode[0]])) {
+                    return(false);
+                }
+            }
+            return(true);
+        }
 
     private function buildGETRequest() {
         $result = 'search.php?';
@@ -70,7 +88,7 @@ class solr_response {
         return($result);
     }
     
-    public function removeRefineLink($removeRefine) {
+    public function buildRemoveLink($removeRefine) {
         $result = $this->buildGETRequest();
         $translate = array('&refine[]='.$removeRefine => '');
         $result = strtr($result, $translate);
