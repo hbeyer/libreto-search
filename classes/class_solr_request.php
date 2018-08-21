@@ -6,7 +6,7 @@ class solr_request {
     public $url = '';
     public $errorMessage;
    
-    const BASE_SELECT = 'http://192.168.0.5:8983/solr/libreto/select?';
+    const BASE_SELECT = 'http://localhost:8983/solr/libreto/select?';
     const FORMAT = 'php';
     const SEARCH_FIELDS = array(
         'fullText' => 'Volltext', 
