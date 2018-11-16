@@ -6,7 +6,7 @@
 <?php endforeach; ?>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li style="margin-right:1em;"><img src="../assets/images/Rotunde.png" height="50" alt="Logo HAB"/></li>
+                    <li style="margin-right:1em;"><img src="assets/images/Rotunde.png" height="50" alt="Logo HAB"/></li>
                 </ul>
             </div>
         </nav>

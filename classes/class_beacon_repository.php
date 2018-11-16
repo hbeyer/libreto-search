@@ -101,10 +101,6 @@ class beacon_repository {
             else {
                 chmod(beacon_repository::FOLDER.'/'.$key, $this->filePermission);
             }
-            /*$test = copy($source['location'], beacon_repository::FOLDER.'/'.$key);
-            if ($test == false) {
-                $this->errorMessages[] = 'Problem beim Download von '.$source['location'];
-            }*/
         }
         $date = date('U');
         file_put_contents(beacon_repository::FOLDER.'/changeDate', $date);
