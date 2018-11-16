@@ -42,8 +42,8 @@
       <span class="icon-bar icon-bar-bottom"></span>
     </button>
     <div class="navbar-brand">
-      <a href="http://ikmk.smb.museum/" title="http://ikmk.smb.museum/" target='_blank'><img alt="Logo" src="https://ikmk.smb.museum/special/logos/logo.png"></a>
-      <a href="index.html" title="Start"><span class="wordmark">Interaktiver Katalog<br>des Münzkabinetts</span></a>
+      <a href="home" title="Münzkabinett der Staatlichen Museen zu Berlin"><img alt="Logo" src="https://ikmk.smb.museum/special/logos/logo.png"></a>
+      <a href="home" title="Start"><span class="wordmark">Interaktiver Katalog<br>des Münzkabinetts</span></a>
     </div>
   </div>
   <div id="navbar-mobile" class="navbar-collapse collapse">
@@ -61,7 +61,7 @@
       </div>
       <div class="navbar-brand-desktop row">
         <div class="col-sm-5">
-          <a href="http://ikmk.smb.museum/" title="http://ikmk.smb.museum/" target='_blank'><img alt="Logo" class="img-responsive" src="https://ikmk.smb.museum/special/logos/logo.png"></a>
+          <a href="home" title="Münzkabinett der Staatlichen Museen zu Berlin"><img alt="Logo" class="img-responsive" src="https://ikmk.smb.museum/special/logos/logo.png"></a>
           <a href="home" title="Start"><span class="wordmark">Interaktiver Katalog des Münzkabinetts</span></a>
         </div>
         <div class="col-sm-7">
@@ -85,7 +85,7 @@
         <h1>Erkunden Sie eine der größten numismatischen Sammlungen der Welt</h1>
         <form action="quick_search?lang=de" method="post" id='quick_search'>
           <div class="input-group">
-            <input type="text" class="form-control" name="quick_search_value" placeholder="z. B. Gold Antike Architektur" value="">
+            <input type="text" class="form-control keyboard" name="quick_search_value" placeholder="z. B. Gold Antike Architektur" value="" id="keyboard">
             <span class="input-group-btn"><button class="btn btn-default" type="submit"><i aria-hidden="true" class="fa fa-search"></i></button></span>
           </div>
           <input type="hidden" name="search_type" value="quick_search">
@@ -94,7 +94,7 @@
       </div>
     </div>
   </div>
-  <img alt="Ansicht des Großen Tresors" class="start-header-image" src="https://ikmk.smb.museum/special/start-header.png">
+  <img title="Ansicht des Großen Tresors" class="start-header-image" src="https://ikmk.smb.museum/special/start-header.png">
 </header>
 
 <main class='container start-sections'>
@@ -121,6 +121,18 @@
 <div id='section-carousel' class='carousel slide' data-ride='carousel'>
 <div class='carousel-inner' role='listbox'>
 <div class='item active'>
+<a class='carousel-caption' href='news?lang=de&news_id=1135' title='Nachrichten'>
+<p>Der Interaktive Katalog des Münzkabinetts IKMK</p>
+<p><time datetime='2018-10-25'>25. Oktober 2018</time></p>
+</a>
+</div>
+<div class='item'>
+<a class='carousel-caption' href='news?lang=de&news_id=1113' title='Nachrichten'>
+<p>Vernetzung bedeutet Normierung - Normierung bedeutet Fähigkeit zum Datenaustausch</p>
+<p><time datetime='2018-07-30'>30. Juli 2018</time></p>
+</a>
+</div>
+<div class='item'>
 <a class='carousel-caption' href='news?lang=de&news_id=1103' title='Nachrichten'>
 <p>Ausstellung 'MUSE MACHT MONETEN' in Speyer</p>
 <p><time datetime='2018-06-21'>21. Juni 2018</time></p>
@@ -142,18 +154,6 @@
 <a class='carousel-caption' href='news?lang=de&news_id=1089' title='Nachrichten'>
 <p>IKMK überschreitet die 33.000</p>
 <p><time datetime='2018-03-14'>14. März 2018</time></p>
-</a>
-</div>
-<div class='item'>
-<a class='carousel-caption' href='news?lang=de&news_id=1076' title='Nachrichten'>
-<p>Münzsammlung des Seminars für Alte Geschichte, Albert-Ludwigs-Universität Freiburg i. Br. jetzt online</p>
-<p><time datetime='2017-12-20'>20. Dezember 2017</time></p>
-</a>
-</div>
-<div class='item'>
-<a class='carousel-caption' href='news?lang=de&news_id=1070' title='Nachrichten'>
-<p>Jens Dornheim als neuer Restaurator am Münzkabinett der Staatlichen Museen zu Berlin</p>
-<p><time datetime='2017-12-15'>15. Dezember 2017</time></p>
 </a>
 </div>
 </div>
@@ -259,6 +259,11 @@
 <script src="https://ikmk.smb.museum/assets/js/vendor/jquery.min.js"></script>
 <script src="https://ikmk.smb.museum/assets/js/vendor/plugins.min.js"></script>
 <script src="https://ikmk.smb.museum/assets/js/onload.js"></script>
+
+<script src='https://ikmk.smb.museum/layout/jquery-ui.min.js'></script>
+<script src='https://ikmk.smb.museum/layout/jquery.keyboard.js'></script>
+<link href="https://ikmk.smb.museum/layout/keyboard.css" rel="stylesheet">
+
 <script src="https://ikmk.smb.museum/js/functions.js"></script>
 
 <script type='text/javascript'>
@@ -288,7 +293,7 @@
          callback_function(data);
       }
     });     
-  }  
+  }
 </script>
 </body>
 </html>

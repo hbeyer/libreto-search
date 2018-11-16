@@ -6,6 +6,7 @@ class beacon_repository {
     public $lastUpdate;    
     const FOLDER = 'beaconFiles';
     const UPDATE_INT = 3600*24*14;
+    private $filePermission = 'a+rwx';
     const USER = 'Dr. Hartmut Beyer, Wolfenbüttel';
     const BEACON_SOURCES = array(
         'wkp' => array('label' => 'Wikipedia', 'location' => 'http://tools.wmflabs.org/persondata/beacon/dewiki.txt', 'target' => 'http://tools.wmflabs.org/persondata/redirect/gnd/de/{ID}'),
@@ -94,10 +95,16 @@ class beacon_repository {
     private function update() {
         ini_set('user_agent', beacon_repository::USER);
         foreach (beacon_repository::BEACON_SOURCES as $key => $source) {
-            $test = copy($source['location'], beacon_repository::FOLDER.'/'.$key);
+            if (!copy($source['location'], beacon_repository::FOLDER.'/'.$key)) {
+                echo 'Kopieren von '.$source['location'].' nach '.beacon_repository::FOLDER.'/'.$key.' schlug fehl.<br />';
+            }
+            else {
+                chmod(beacon_repository::FOLDER.'/'.$key, $this->filePermission);
+            }
+            /*$test = copy($source['location'], beacon_repository::FOLDER.'/'.$key);
             if ($test == false) {
                 $this->errorMessages[] = 'Problem beim Download von '.$source['location'];
-            }
+            }*/
         }
         $date = date('U');
         file_put_contents(beacon_repository::FOLDER.'/changeDate', $date);
