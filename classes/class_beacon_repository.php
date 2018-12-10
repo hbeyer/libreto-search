@@ -4,11 +4,11 @@ class beacon_repository {
 
     public $errorMessages = array();
     public $lastUpdate;    
-    const FOLDER = 'beaconFiles';
-    const UPDATE_INT = 3600*24*14;
-    private $filePermission = 'a+rwx';
-    const USER = 'Dr. Hartmut Beyer, Wolfenbüttel';
-    const BEACON_SOURCES = array(
+    private $folder = 'beaconFiles';
+    private $update_int = 1209600;
+    private $filePermission = 0777;
+    private $user = 'Dr. Hartmut Beyer, Wolfenbüttel';
+    public $beacon_sources = array(
         'wkp' => array('label' => 'Wikipedia', 'location' => 'http://tools.wmflabs.org/persondata/beacon/dewiki.txt', 'target' => 'http://tools.wmflabs.org/persondata/redirect/gnd/de/{ID}'),
         'ddb' => array('label' => 'Deutsche Digitale Bibliothek', 'location' => 'https://www.archivportal-d.de/static/de/beacon-archivportal-persons.txt', 'target' => 'https://www.archivportal-d.de/person/gnd/{ID}'), 		
         'db' => array('label' => 'Deutsche Biographie', 'location' => 'http://www.historische-kommission-muenchen-editionen.de/beacon_db_register.txt', 'target' => 'http://www.deutsche-biographie.de/pnd{ID}.html'),
@@ -26,7 +26,7 @@ class beacon_repository {
         'trithemius' => array('label' => 'Trithemius: De scriptoribus ecclesiasticis', 'location' => 'http://www.mgh-bibliothek.de/beacon/trithemius', 'target' => 'http://www.mgh.de/index.php?&wa72ci_url=%2Fcgi-bin%2Fmgh%2Fallegro.pl&db=opac&var5=IDN&TYP=&id=438&item5=trithemius_{ID}'),
         'fabricius' => array('label' => 'Fabricius: Bibliotheca latina', 'location' => 'http://www.mgh-bibliothek.de/beacon/fabricius', 'target' => 'http://www.mgh.de/index.php?&wa72ci_url=%2Fcgi-bin%2Fmgh%2Fallegro.pl&db=opac&var5=IDN&TYP=&id=438&item5=fabricius_{ID}'),
         'mav' => array('label' => 'Melchior Adam: Vitae', 'location' => 'http://www.historische-kommission-muenchen-editionen.de/beacond/adam.php?beacon', 'target' => 'http://www.historische-kommission-muenchen-editionen.de/beacond/adam.php?pnd={ID}'),
-'jen' => array('label' => 'Jewish Encyclopedia 1906', 'location' => 'http://www.historische-kommission-muenchen-editionen.de/beacond/jewishenc.php?beacon', 'target' => 'http://www.historische-kommission-muenchen-editionen.de/beacond/jewishenc.php?pnd={ID}'),
+		'jen' => array('label' => 'Jewish Encyclopedia 1906', 'location' => 'http://www.historische-kommission-muenchen-editionen.de/beacond/jewishenc.php?beacon', 'target' => 'http://www.historische-kommission-muenchen-editionen.de/beacond/jewishenc.php?pnd={ID}'),
         'gspd' => array('label' => 'Germania Sacra Personendatenbank', 'location' => 'http://personendatenbank.germania-sacra.de/beacon.txt', 'target' => 'http://personendatenbank.germania-sacra.de/index/gnd/{ID}'),	
         'hpk' => array('label' => 'Hamburger Professorinnen- und Professorenkatalog', 'location' => 'https://www.hpk.uni-hamburg.de/hpk_gnd_beacon.txt', 'target' => 'https://www.hpk.uni-hamburg.de/resolve/gnd/{ID}'),
         'cph' => array('label' => 'Helmstedter Professorenkatalog', 'location' => 'http://uni-helmstedt.hab.de/beacon.php', 'target' => 'http://uni-helmstedt.hab.de/index.php?cPage=5&sPage=prof&wWidth=1920&wHeight=957&suche1=gnd&pnd1=&muster1={ID}'),		
@@ -57,13 +57,15 @@ class beacon_repository {
 
     function __construct() {
         if ($this->validate() == false) {
-            mkdir(beacon_repository::FOLDER, 0777);
+			if (!is_dir($this->folder)) {
+				mkdir($this->folder, 0777);
+			}
             $this->update();            
         }
         else {
-            $dateArchive = intval(file_get_contents(beacon_repository::FOLDER.'/changeDate'));
+            $dateArchive = intval(file_get_contents($this->folder.'/changeDate'));
             $this->lastUpdate = date('Y-m-d H:i:s', $dateArchive);
-            if ((date('U') - $dateArchive) > beacon_repository::UPDATE_INT) {
+            if ((date('U') - $dateArchive) > $this->update_int) {
                 $this->update();
             }
         }
@@ -74,7 +76,7 @@ class beacon_repository {
         $result = array();
         $matches = $this->getMatches($gnd);
         foreach ($matches as $key) {
-            $result[] = $this->makeLink($key, $gnd, $target);
+			$result[] = $this->makeLink($key, $gnd, $target);
         }
         return($result);
     }
@@ -93,24 +95,24 @@ class beacon_repository {
     }
 
     private function update() {
-        ini_set('user_agent', beacon_repository::USER);
-        foreach (beacon_repository::BEACON_SOURCES as $key => $source) {
-            if (!copy($source['location'], beacon_repository::FOLDER.'/'.$key)) {
-                echo 'Kopieren von '.$source['location'].' nach '.beacon_repository::FOLDER.'/'.$key.' schlug fehl.<br />';
+        ini_set('user_agent', $this->user);
+        foreach ($this->beacon_sources as $key => $source) {
+            if (!copy($source['location'], $this->folder.'/'.$key)) {
+                echo 'Kopieren von '.$source['location'].' nach '.$this->folder.'/'.$key.' schlug fehl.<br />';
             }
             else {
-                chmod(beacon_repository::FOLDER.'/'.$key, $this->filePermission);
+                chmod($this->folder.'/'.$key, $this->filePermission);
             }
         }
         $date = date('U');
-        file_put_contents(beacon_repository::FOLDER.'/changeDate', $date);
+        file_put_contents($this->folder.'/changeDate', $date);
         $this->lastUpdate = date('Y-m-d H:i:s', $date);
     }
 
     private function getMatches($gnd) {
         $result = array();
-        foreach (beacon_repository::BEACON_SOURCES as $key => $source) {
-            $content = file_get_contents(beacon_repository::FOLDER.'/'.$key);
+        foreach ($this->beacon_sources as $key => $source) {
+            $content = file_get_contents($this->folder.'/'.$key);
             if (strpos($content, $gnd) != null) {
                 $result[] = $key;
             }
@@ -120,8 +122,8 @@ class beacon_repository {
 
     private function getMatchesMulti($gndArray) {
         $result = array();
-        foreach(beacon_repository::BEACON_SOURCES as $key => $source) {
-            $content = file_get_contents(beacon_repository::FOLDER.'/'.$key);
+        foreach($this->beacon_sources as $key => $source) {
+            $content = file_get_contents($this->folder.'/'.$key);
             foreach ($gndArray as $gnd) {
                 if (strpos($content, $gnd) != null) {
                 $result[$gnd][] = $key;
@@ -135,26 +137,30 @@ class beacon_repository {
         if (in_array($target, array('_blank', '_self', '_parent', '_top'))) {
             $target = ' target="'.$target.'"';
         }
-        $pattern = beacon_repository::BEACON_SOURCES[$key]['target'];
+        $pattern = $this->beacon_sources[$key]['target'];
         $replacement = array('{ID}' => $gnd);
         $url = strtr($pattern, $replacement);
-        $link  = '<a href="'.$url.'"'.$target.'>'.beacon_repository::BEACON_SOURCES[$key]['label'].'</a>';
+        $link  = '<a href="'.$url.'"'.$target.'>'.$this->beacon_sources[$key]['label'].'</a>';
         return($link);
     }
 
     private function validate() {
-        if (!is_dir(beacon_repository::FOLDER)) {
+        if (!is_dir($this->folder)) {
+			echo 'Ordner existiert nicht';
             return(false);
         }
-        if (!file_exists(beacon_repository::FOLDER.'/changeDate')) {
+        if (!file_exists($this->folder.'/changeDate')) {
+			echo 'changeDate existiert nicht';
             return(false);
         }
-        $date = intval(file_get_contents(beacon_repository::FOLDER.'/changeDate'));
+        $date = intval(file_get_contents($this->folder.'/changeDate'));
         if ($date < 1400000000 or $date > date('U')) {
+			echo 'changeDate ist nicht plausibel';
             return(false);
         }
-        foreach (beacon_repository::BEACON_SOURCES as $key => $source) {
-            if (!file_exists(beacon_repository::FOLDER.'/'.$key)) {
+        foreach ($this->beacon_sources as $key => $source) {
+            if (!file_exists($this->folder.'/'.$key)) {
+				echo $key.' existiert nicht';
                 return(false);
             }
         }

@@ -1,4 +1,5 @@
 <?php
+set_time_limit(600);
 include('classes/class_beacon_repository.php');
 include('classes/class_gnd_request.php');
 include('templates/functions.php');
@@ -34,13 +35,16 @@ else {
                 $links = $beacon_request->getLinks($gnd, '_blank');
                 include('templates/gndData.php');
             }
+			else {
+				echo '<p>Bitte &uuml;bergeben Sie eine GND-Nummer in der Form <a href="personinfo.php?gnd=118559192">personinfo.php?gnd=118559192</a></p>';
+			}
             ?>
             </div>        
             <div class="row">
                 <i>Ausgewertet wurden:</i> 
                 <?php 
                     $labels = array();
-                    foreach (beacon_repository::BEACON_SOURCES as $source) { 
+                    foreach ($beacon_request->beacon_sources as $source) { 
                         $labels[] = $source['label'];  
                     }
                     echo implode('; ', $labels);

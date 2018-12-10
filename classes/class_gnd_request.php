@@ -4,7 +4,7 @@ class gnd_request {
 
     public $id;
     public $errorMessage;
-    const BASE = 'http://hub.culturegraph.org/entityfacts/';
+    private $base = 'http://hub.culturegraph.org/entityfacts/';
     private $response;
     
     public $preferredName;
@@ -21,7 +21,7 @@ class gnd_request {
     function __construct($id) {
         $this->id = $id;
         if ($this->validateGND() == true) {
-            $string = @file_get_contents(gnd_request::BASE.$this->id);
+            $string = @file_get_contents($this->base.$this->id);
             if (!$string) {
                 $this->errorMessage = 'Server hub.culturegraph.org/entityfacts/ antwortet nicht';
             }

@@ -32,8 +32,9 @@ class solr_response {
     public function displayResults() {
         include('templates/docList.php');
     }
-
-    public function displayFacets() {
+    
+    // Der Parameter ist ein Notbehelf, weil die Benennungen der Facetten in der Klasse solr_request stehen
+    public function displayFacets($request) {
         if ($_GET['refine'] != array()) {
             if ($this->validateRefine($_GET['refine']) == true) {
                 include('templates/refines.php');
@@ -48,9 +49,11 @@ class solr_response {
                 if (!isset($explode[0]) or !isset($explode[1])) {
                     return(false);
                 }
-                if (!isset(solr_request::FACET_FIELDS[$explode[0]])) {
+                /* Muss auf anderer Ebene abgefangen werden
+				if (!isset(solr_request::FACET_FIELDS[$explode[0]])) {
                     return(false);
                 }
+				*/
             }
             return(true);
         }

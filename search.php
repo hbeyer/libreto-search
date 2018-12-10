@@ -51,7 +51,7 @@ $request = new solr_request($_GET);
                             <span class="input-group-addon" style="padding:0px;">
                                 <select name="field" style="height:32px;">
                                     <?php
-                                    foreach (solr_request::SEARCH_FIELDS as $field => $label) {
+                                    foreach ($request->search_fields as $field => $label) {
                                         $selected = '';
                                         if ($_GET['field'] == $field) {
                                         $selected = ' selected';
@@ -80,7 +80,7 @@ $request = new solr_request($_GET);
                         <div class="form-group">
                             <select multiple class="form-control" name="owner[]" size="5">
                                 <?php
-                                foreach (solr_request::FILTERS as $field => $label) {
+                                foreach ($request->filters as $field => $label) {
                                     $selected = '';
                                     if (in_array($field, $_GET['owner'])) {
                                         $selected = ' selected';
@@ -107,6 +107,7 @@ $request = new solr_request($_GET);
                             echo '<div class="alert alert-warning">'.$response->errorMessage.'</div>';
                         }
                         else {
+                            echo $request->url;
                             $response->displayResults();
                             $showFacets = true;
                         }
@@ -116,7 +117,7 @@ $request = new solr_request($_GET);
                 <div class="col-sm-4">
                 <?php
                 if ($showFacets == true) { 
-                    $response->displayFacets();
+                    $response->displayFacets($request);
                 }
                 ?>
                 </div>

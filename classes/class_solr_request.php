@@ -8,7 +8,7 @@ class solr_request {
    
     const BASE_SELECT = 'http://localhost:8983/solr/libreto/select?';
     const FORMAT = 'php';
-    const SEARCH_FIELDS = array(
+    public $search_fields = array(
         'fullText' => 'Volltext', 
         'titleBib' => 'Titel', 
         'titleCat' => 'Titel Altkatalog', 
@@ -25,15 +25,15 @@ class solr_request {
         'comment' => 'Kommentar',
         'id' => 'ID'
     );
-    const FILTER_FIELD = 'ownerGND';
-    const FILTERS = array(
+    public $filter_field = 'ownerGND';
+    public $filters = array(
         'all' => 'Alle',
         '141678615' => 'Antoinette Amalie von Braunschweig-Wolfenbüttel',
         '128989289' => 'Bahnsen, Benedikt',
         '117671622' => 'Liddel, Duncan',
         '1055708286' => 'Rehlinger, Carl Wolfgang'
     );
-    const FACET_FIELDS = array(
+    public $facet_fields = array(
         'nameCollection_str' => 'Sammlung',
         'subjects_str' => 'Inhalte',
         'genres_str' => 'Gattung',
@@ -45,7 +45,7 @@ class solr_request {
     
     /*  Variablen für die Suche */
     private $queries; // Enthält assoziative Arrays mit den Indices 'field' und 'value'
-    private $filters = array();
+    private $filters_active = array();
     private $start = 0;
 
     function __construct($get) {
@@ -62,7 +62,7 @@ class solr_request {
             if (isset($get['owner'])) {
                 if (in_array('all', $get['owner']) == false)  {
                     foreach ($get['owner'] as $gnd) {
-                        $this->filters[] = $gnd;
+                        $this->filters_active[] = $gnd;
                     }
                 }
             }
@@ -90,7 +90,7 @@ class solr_request {
         if (isset($this->filters[0])) {
             $filters = array();
             foreach ($this->filters as $gnd) {
-                $filters[] = solr_request::FILTER_FIELD.':'.$gnd;
+                $filters[] = $this->filter_field.':'.$gnd;
             }
             $filterString = 'fq='.implode(urlencode(' OR '), $filters).'&';
         }
@@ -116,7 +116,7 @@ class solr_request {
         }
 
         $facetArray = '';
-        foreach (solr_request::FACET_FIELDS as $field => $label) {
+        foreach ($this->facet_fields as $field => $label) {
             $facetArray[] = 'facet.field='.$field;
         }
         $facetString = implode('&', $facetArray);
@@ -128,7 +128,7 @@ class solr_request {
 
     private function validate() {
         foreach ($this->queries as $query) {
-            if (isset(solr_request::SEARCH_FIELDS[$query['field']]) == false and isset(solr_request::FACET_FIELDS[$query['field']]) == false) {
+            if (isset($this->search_fields[$query['field']]) == false and isset($this->facet_fields[$query['field']]) == false) {
                 $this->errorMessage = 'Ungültiges Feld: '.$query['field'];
                 return(false);
             }
@@ -137,8 +137,8 @@ class solr_request {
                 return(false);
             }
         }
-        foreach ($this->filters as $gnd) {
-            if (isset(solr_request::FILTERS[$gnd]) == false) {
+        foreach ($this->filters_active as $gnd) {
+            if (isset($this->filters[$gnd]) == false) {
                 $this->errorMessage = 'Unzulässiger Filter: '.$gnd;
                 return(false);
             }
