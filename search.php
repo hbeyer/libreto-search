@@ -1,4 +1,5 @@
 <?php
+include('classes/class_solr_interaction.php');
 include('classes/class_solr_request.php');
 include('classes/class_solr_response.php');
 include('classes/class_reference.php');
@@ -107,7 +108,6 @@ $request = new solr_request($_GET);
                             echo '<div class="alert alert-warning">'.$response->errorMessage.'</div>';
                         }
                         else {
-                            echo $request->url;
                             $response->displayResults();
                             $showFacets = true;
                         }

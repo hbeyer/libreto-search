@@ -1,6 +1,6 @@
 <?php
 
-class solr_response {
+class solr_response extends solr_interaction {
     
     public $errorMessage = false;
     public $numFound;
@@ -33,8 +33,7 @@ class solr_response {
         include('templates/docList.php');
     }
     
-    // Der Parameter ist ein Notbehelf, weil die Benennungen der Facetten in der Klasse solr_request stehen
-    public function displayFacets($request) {
+    public function displayFacets() {
         if ($_GET['refine'] != array()) {
             if ($this->validateRefine($_GET['refine']) == true) {
                 include('templates/refines.php');
@@ -49,11 +48,6 @@ class solr_response {
                 if (!isset($explode[0]) or !isset($explode[1])) {
                     return(false);
                 }
-                /* Muss auf anderer Ebene abgefangen werden
-				if (!isset(solr_request::FACET_FIELDS[$explode[0]])) {
-                    return(false);
-                }
-				*/
             }
             return(true);
         }
@@ -98,6 +92,14 @@ class solr_response {
         $result = rtrim($result, '&');
         return($result);
     }
+    public function getRefineContent($refine) {
+        $explode = explode(':', $refine);
+        $field = array_shift($explode);
+        $content = array_shift($explode);
+        $label = $this->facet_fields[$field];
+        return(array('label' => $label, 'content' => $content));    
+    }
+
     
 }
 

@@ -1,54 +1,17 @@
 <?php
 
 
-class solr_request {
+class solr_request extends solr_interaction {
     
     public $url = '';
     public $errorMessage;
-   
-    const BASE_SELECT = 'http://localhost:8983/solr/libreto/select?';
-    const FORMAT = 'php';
-    public $search_fields = array(
-        'fullText' => 'Volltext', 
-        'titleBib' => 'Titel', 
-        'titleCat' => 'Titel Altkatalog', 
-        'author' => 'Autor(in)', 
-        'contributor' => 'Beiträger(in)', 
-        'histSubject' => 'Rubrik Altkatalog', 
-        'place' => 'Erscheinungsort', 
-        'publisher' => 'Drucker(in)', 
-        'yearNormalized' => 'Jahr', 
-        'subjects' => 'Inhalt', 
-        'genres' => 'Gattung', 
-        'languagesFull' => 'Sprache', 
-        'format' => 'Format',
-        'comment' => 'Kommentar',
-        'id' => 'ID'
-    );
-    public $filter_field = 'ownerGND';
-    public $filters = array(
-        'all' => 'Alle',
-        '141678615' => 'Antoinette Amalie von Braunschweig-Wolfenbüttel',
-        '128989289' => 'Bahnsen, Benedikt',
-        '117671622' => 'Liddel, Duncan',
-        '1055708286' => 'Rehlinger, Carl Wolfgang'
-    );
-    public $facet_fields = array(
-        'nameCollection_str' => 'Sammlung',
-        'subjects_str' => 'Inhalte',
-        'genres_str' => 'Gattung',
-        'languagesFull_str' => 'Sprache',
-        'format_str' => 'Format',
-        'histSubject_str' => 'Rubrik',
-        'publisher_str' => 'Drucker(in)'
-    );
-    
+       
     /*  Variablen für die Suche */
     private $queries; // Enthält assoziative Arrays mit den Indices 'field' und 'value'
     private $filters_active = array();
     private $start = 0;
 
-    function __construct($get) {
+    function __construct($get = null) {
         if (isset($get['start'])) {
             $this->start = $get['start'];
         }
@@ -127,6 +90,9 @@ class solr_request {
     }
 
     private function validate() {
+        if (!is_array($this->queries)) {
+            return(false);
+        }
         foreach ($this->queries as $query) {
             if (isset($this->search_fields[$query['field']]) == false and isset($this->facet_fields[$query['field']]) == false) {
                 $this->errorMessage = 'Ungültiges Feld: '.$query['field'];
