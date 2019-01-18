@@ -8,6 +8,7 @@ class reference {
     public $id;
     public $url;
     public $link;
+    public $valid = true;
 
     function __construct($system, $id, $level = 'manifestation') {
         $this->id = $id;
@@ -15,25 +16,42 @@ class reference {
         $this->systemClean = translateAnchor($system);
         $this->systemClean = strtolower(str_replace(' ', '', $this->systemClean));
 
+        if ($this->validate() !== true) {
+            $this->valid = false;
+        }
+
         if ($level == 'manifestation')  {
-            if (isset($this->bases[$this->systemClean])) {
-                $this->nameSystem = $this->namessystems[$this->systemClean];
-                $this->url = strtr($this->bases[$this->systemClean], array('{ID}' => $id));
-                $this->link = '<a href="'.$this->url.'" title="Anzeige der Ausgabe in '.$this->namessystems[$this->systemClean].'" target="_blank">'.$this->namessystems[$this->systemClean].'</a>';
+            if (isset(reference::BASES[$this->systemClean])) {
+                $this->nameSystem = reference::NAMESSYSTEMS[$this->systemClean];
+                $this->url = strtr(reference::BASES[$this->systemClean], array('{ID}' => $id));
+                $this->link = '<a href="'.$this->url.'" title="Anzeige der Ausgabe in '.reference::NAMESSYSTEMS[$this->systemClean].'" target="_blank">'.reference::NAMESSYSTEMS[$this->systemClean].'</a>';
             }
         }
         elseif ($level == 'work')  {
-            if (isset($this->basesworks[$this->systemClean])) {
-                $this->nameSystem = $this->namessystems[$this->systemClean];
-                $this->url = strtr($this->basesworks[$this->systemClean], array('{ID}' => $id));
-                $this->link = '<a href="'.$this->url.'" title="Anzeige des Werks in '.$this->namessystems[$this->systemClean].'" target="_blank">'.$this->namessystems[$this->systemClean].'</a>';
+            if (isset(reference::BASESWORKS[$this->systemClean])) {
+                $this->nameSystem = reference::NAMESSYSTEMS[$this->systemClean];
+                $this->url = strtr(reference::BASESWORKS[$this->systemClean], array('{ID}' => $id));
+                $this->link = '<a href="'.$this->url.'" title="Anzeige des Werks in '.reference::NAMESSYSTEMS[$this->systemClean].'" target="_blank">'.reference::NAMESSYSTEMS[$this->systemClean].'</a>';
             }
         }
     }
 
+    private function validate() {
+            if (empty(reference::NAMESSYSTEMS[$this->systemClean]) or empty(reference::PATTERNSYSTEMS[$this->systemClean])) {
+                return(false);
+            }
+            if (preg_match(reference::PATTERNSYSTEMS[$this->systemClean], $this->system.' '.$this->id) == 0) {
+                return(false);
+            }
+            if (empty(reference::BASES[$this->systemClean]) and empty(reference::BASESWORKS[$this->systemClean])) {
+                return(false);
+            }
+            return(true);
+    }
+
     //Bei den Indices werden Ä, Ö, Ü, ä, ö, ü und ß durch Umschrift (ae, oe, ue, ss) ersetzt, Leerzeichen entfernt und Groß- in Kleinbuchstaben konvertiert.
 
-    private $bases = array(
+    const BASES = array(
 	    'vd16' => 'http://gateway-bayern.de/VD16+{ID}', 
 	    'vd17' => 'http://gso.gbv.de/DB=1.28/CMD?ACT=SRCHA&IKT=8002&TRM={ID}', 
 	    'vd18' => 'https://gso.gbv.de/DB=1.65/CMD?ACT=SRCHA&IKT=8002&TRM=VD18+{ID}', 
@@ -77,13 +95,13 @@ class reference {
 	    'manumed' => 'http://www.manuscripta-mediaevalia.de/dokumente/html/{ID}'
 	    );
 
-    private $basesworks = array(
+    const BASESWORKS = array(
 	    'dnb' => 'http://d-nb.info/gnd/{ID}',
 	    'gnd' => 'http://d-nb.info/gnd/{ID}',
 	    'wikipedia' => 'https://de.wikipedia.org/wiki/{ID}'
     );
 
-    private $namessystems = array(
+    const NAMESSYSTEMS = array(
 	    'vd16' => 'Verzeichnis der im deutschen Sprachbereich erschienenen Drucke des 16. Jahrhunderts (VD 16)', 
 	    'vd17' => 'Verzeichnis der im deutschen Sprachraum erschienenen Drucke des 17. Jahrhunderts (VD 17)', 
 	    'vd18' => 'Verzeichnis Deutscher Drucke des 18. Jahrhunderts (VD 18)', 
@@ -130,9 +148,9 @@ class reference {
         'wikipedia' => 'Wikipedia'
 	    );
 
-    private $patternsystems = array(
+    const PATTERNSYSTEMS = array(
 	    'vd16' => '~VD[ ]?16 ([A-Z][A-Z]? [0-9]{1,5})~', 
-	    'vd17' => '~VD[ ]?17 ([0-9]{1,3}:[0-9]{1,7}[A-Z])~', 
+	    'vd17' => '~VD[ ]?17? ([0-9]{1,3}:[0-9]{1,7}[A-Z])~', 
 	    'vd18' => '~VD ?18 ([0-9]{7,9})~',
 	    'edit16' => '~EDIT ?[16]{0,2} [A-Z]{4} ?([0-9]{1,10})~',
 	    'edit' => '~EDIT ?[A-Z]{4} ?([0-9]{1,10})~',
@@ -151,6 +169,7 @@ class reference {
 	    'oenb' => '~ÖNB ?([A-Za-z]{2,3}[0-9]{5,10})~',
 	    'inka' => '~INKA ?([0-9]{8})~',
 	    'bvb' => '~BVB (BV[0-9]{9})~',
+	    'bsb' => '~BVB (BV[0-9]{9})~',
 	    'hbz' => '~HBZ ([HT]T[0-9]{9})~',
 	    'hebis' => '~HeBIS ([0-9]{7,10})~',
 	    'londonbl' => '~BL (BLL[0-9]{11})~',

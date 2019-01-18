@@ -3,7 +3,8 @@
 class beacon_repository {
 
     public $errorMessages = array();
-    public $lastUpdate;    
+    public $lastUpdate;
+    public $valid = null;
     private $folder = 'beaconFiles';
     private $update_int = 1209600;
     private $filePermission = 0777;
@@ -56,7 +57,8 @@ class beacon_repository {
 // '' => array('label' => '', 'location' => '', 'target' => ''),
 
     function __construct() {
-        if ($this->validate() == false) {
+        $this->validate();
+        if ($this->valid != true) {
 			if (!is_dir($this->folder)) {
 				mkdir($this->folder, 0777);
 			}
@@ -120,7 +122,7 @@ class beacon_repository {
         return($result);
     }
 
-    private function getMatchesMulti($gndArray) {
+    public function getMatchesMulti($gndArray) {
         $result = array();
         foreach($this->beacon_sources as $key => $source) {
             $content = file_get_contents($this->folder.'/'.$key);
@@ -145,26 +147,28 @@ class beacon_repository {
     }
 
     private function validate() {
+        $status = null;
         if (!is_dir($this->folder)) {
 			echo 'Ordner existiert nicht';
-            return(false);
+            $status = false;
         }
         if (!file_exists($this->folder.'/changeDate')) {
 			echo 'changeDate existiert nicht';
-            return(false);
+            $status = false;
         }
         $date = intval(file_get_contents($this->folder.'/changeDate'));
         if ($date < 1400000000 or $date > date('U')) {
 			echo 'changeDate ist nicht plausibel';
-            return(false);
+            $status = false;
         }
         foreach ($this->beacon_sources as $key => $source) {
             if (!file_exists($this->folder.'/'.$key)) {
 				echo $key.' existiert nicht';
-                return(false);
+                $status = false;
             }
         }
-        return(true);
+        $status = true;
+        $this->valid = $status;
     }
 
 }

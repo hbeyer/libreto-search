@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="nofollow" />
   <title>MK-B | Start</title>
   <meta name="description" content="Münzkabinett, Staatliche Museen zu Berlin - Stiftung Preußischer Kulturbesitz" />
   <meta property="og:type" content="website" />
@@ -25,8 +26,8 @@
   <link rel="mask-icon" href="https://ikmk.smb.museum/special/favicons/safari-pinned-tab.svg" color="#5bbad5" />
   <meta name="theme-color" content="#ffffff" />
   <link href="https://ikmk.smb.museum/assets/css/main.min.css?1502031675" rel="stylesheet" />
-  <link href="https://ikmk.smb.museum/layout/extended.css?1529489512" rel="stylesheet" />
-  <link href="https://ikmk.smb.museum/special/local.css?1515578728" rel="stylesheet" />
+  <link href="https://ikmk.smb.museum/layout/extended.css?1544461047" rel="stylesheet" />
+  <link href="https://ikmk.smb.museum/special/local.css?1542821856" rel="stylesheet" />
   
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -42,16 +43,14 @@
       <span class="icon-bar icon-bar-bottom"></span>
     </button>
     <div class="navbar-brand">
-      <a href="home" title="Münzkabinett der Staatlichen Museen zu Berlin"><img alt="Logo" src="https://ikmk.smb.museum/special/logos/logo.png"></a>
-      <a href="home" title="Start"><span class="wordmark">Interaktiver Katalog<br>des Münzkabinetts</span></a>
+      <a href="https://ikmk.smb.museum/home" title="Home"><img alt="Logo" src="https://ikmk.smb.museum/special/logos/logo.png"></a>
+      <a href="https://ikmk.smb.museum/home" title="Start"><span class="wordmark">Interaktiver Katalog<br>des Münzkabinetts</span></a>
     </div>
   </div>
   <div id="navbar-mobile" class="navbar-collapse collapse">
 <ul class="nav navbar-nav"><li><a href="home?lang=de" title="Start">Start</a></li><li><a href="quick_search?lang=de" title="Schnellsuche">Schnellsuche</a></li><li><a href="tag_search?lang=de" title="Schlagwortsuche">Schlagwortsuche</a></li><li><a href="reference_search?lang=de" title="Referenzsuche">Referenzsuche</a></li><li><a href="department_search?lang=de" title="Abteilungen">Abteilungen</a></li><li><a href="holding_search?lang=de" title="Bestände">Bestände</a></li><li><a href="map_search?lang=de" title="Karte">Karte</a></li><li><ul class="nav-footer"><li><a href="news?lang=de" title="Nachrichten">Nachrichten</a></li><li><a href="contact?lang=de" title="Kontakt">Kontakt</a></li><li><a href="about?lang=de" title="Über uns">Über uns</a></li><li><ul class="nav-languages"><li class="active"><a href="https://ikmk.smb.museum/home?lang=de" title="Deutsch">DE</a></li><li><a href="https://ikmk.smb.museum/home?lang=en" title="English">EN</a></li></ul></li></ul></li></ul>
   </div>
-</nav>
-
-<nav id="nav-desktop" class="navbar navbar-default navbar-fixed-top">
+</nav><nav id="nav-desktop" class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="container">
       <div class="row">
@@ -61,11 +60,11 @@
       </div>
       <div class="navbar-brand-desktop row">
         <div class="col-sm-5">
-          <a href="home" title="Münzkabinett der Staatlichen Museen zu Berlin"><img alt="Logo" class="img-responsive" src="https://ikmk.smb.museum/special/logos/logo.png"></a>
-          <a href="home" title="Start"><span class="wordmark">Interaktiver Katalog des Münzkabinetts</span></a>
+          <a href="https://ikmk.smb.museum/home" title="Home"><img alt="Logo" class="img-responsive" src="https://ikmk.smb.museum/special/logos/logo.png"></a>
+          <a href="https://ikmk.smb.museum/home" title="Start"><span class="wordmark">Interaktiver Katalog des Münzkabinetts</span></a>
         </div>
         <div class="col-sm-7">
-          <a href="index.html" title="Start"><span class="wordmark">Interaktiver Katalog des Münzkabinetts</span></a>
+          <a href="https://ikmk.smb.museum/home" title="Start"><span class="wordmark">Interaktiver Katalog des Münzkabinetts</span></a>
         </div>
       </div>
     </div>
@@ -121,6 +120,18 @@
 <div id='section-carousel' class='carousel slide' data-ride='carousel'>
 <div class='carousel-inner' role='listbox'>
 <div class='item active'>
+<a class='carousel-caption' href='news?lang=de&news_id=1162' title='Nachrichten'>
+<p>Peter Robert Franke  (1926-2018)</p>
+<p><time datetime='2019-01-08'>8. Januar 2019</time></p>
+</a>
+</div>
+<div class='item'>
+<a class='carousel-caption' href='news?lang=de&news_id=1149' title='Nachrichten'>
+<p>Der Interaktive Katalog des Münzkabinetts (IKMK) erreicht die 34.000</p>
+<p><time datetime='2018-12-16'>16. Dezember 2018</time></p>
+</a>
+</div>
+<div class='item'>
 <a class='carousel-caption' href='news?lang=de&news_id=1135' title='Nachrichten'>
 <p>Der Interaktive Katalog des Münzkabinetts IKMK</p>
 <p><time datetime='2018-10-25'>25. Oktober 2018</time></p>
@@ -142,18 +153,6 @@
 <a class='carousel-caption' href='news?lang=de&news_id=1102' title='Nachrichten'>
 <p>Jahresbericht des Münzkabinetts der Staatlichen Museen zu Berlin für 2017</p>
 <p><time datetime='2018-05-19'>19. Mai 2018</time></p>
-</a>
-</div>
-<div class='item'>
-<a class='carousel-caption' href='news?lang=de&news_id=1090' title='Nachrichten'>
-<p>Zum Tod von Erivan Haub, Förderer des Münzkabinetts der Staatlichen Museen zu Berlin</p>
-<p><time datetime='2018-03-17'>17. März 2018</time></p>
-</a>
-</div>
-<div class='item'>
-<a class='carousel-caption' href='news?lang=de&news_id=1089' title='Nachrichten'>
-<p>IKMK überschreitet die 33.000</p>
-<p><time datetime='2018-03-14'>14. März 2018</time></p>
 </a>
 </div>
 </div>
