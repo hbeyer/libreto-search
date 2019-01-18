@@ -8,8 +8,10 @@ foreach (glob("classes/class_*.php") as $filename)
 include('functions/classDefinition.php');
 include('functions/encode.php');
 
-$bahnsen = new reconstruction('../libreto/user/bahnsen/bahnsen.xml', 'bahnsen');
-$bahnsen->enrichData();
-$bahnsen->saveAllFormats();
+/*
+$reconstruction = new reconstruction('{path to file with ending}', '{project name}');
+$reconstruction->enrichData();
+$reconstruction->saveAllFormats();
+*/
 
 ?>
