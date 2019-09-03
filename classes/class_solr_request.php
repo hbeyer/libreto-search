@@ -78,7 +78,7 @@ class solr_request extends solr_interaction {
             $start = '&start='.$this->start;
         }
 
-        $facetArray = '';
+        $facetArray = array();
         foreach ($this->facet_fields as $field => $label) {
             $facetArray[] = 'facet.field='.$field;
         }

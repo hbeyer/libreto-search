@@ -7,7 +7,7 @@ foreach($doc[$role] as $personString)  {
         $name = $split[0];
     }
     if (isset($split[1])) {
-        $name .= ' <a href="personinfo.php?gnd='.$split[1].'" title="Informationsseite zur Person anzeigen" target="_blank"><span class="glyphicon glyphicon-info-sign"></span></a>';
+        $name .= ' <a href="http://beaconfinder.mww-forschung.de/index.php?gnd='.$split[1].'" title="Informationsseite zur Person anzeigen" target="_blank"><span class="glyphicon glyphicon-info-sign"></span></a>';
     }
     if ($name) {
         $personsArray[] = $name;

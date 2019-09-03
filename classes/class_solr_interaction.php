@@ -27,8 +27,10 @@ class solr_interaction {
         'all' => 'Alle',
         '141678615' => 'Antoinette Amalie von Braunschweig-Wolfenbüttel',
         '128989289' => 'Bahnsen, Benedikt',
+        '116118547' => 'Caselius, Johannes',
         '117671622' => 'Liddel, Duncan',
-        '1055708286' => 'Rehlinger, Carl Wolfgang'
+        '1055708286' => 'Rehlinger, Carl Wolfgang',
+        '6064449-7' => 'Reichsstift Gandersheim'
     );
     public $facet_fields = array(
         'nameCollection_str' => 'Sammlung',
