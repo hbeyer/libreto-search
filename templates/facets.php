@@ -9,13 +9,20 @@
 ?>
 <?php foreach ($facetArray as $value => $hits): ?>
 <?php if ($hits > 0): ?>
+<?php $showValue = $value; ?>
 <?php 
     if ($count > $max) {
         $class = ' class="overhang"';
     }
     $count++;
 ?>
-                    <li<?php echo $class; ?>><a href="<?php echo $this->buildFacetLink($field.':'.$value); ?>" class="facetLink"><?php echo $value; ?></a> <span class="badge"><?php echo $hits; ?></span></li>
+<?php
+if ($field == 'misc_str') {
+    $misc = new miscellany($value);
+    $showValue = $misc->__toString();
+}
+?>
+                    <li<?php echo $class; ?>><a href="<?php echo $this->buildFacetLink($field.':'.$value); ?>" class="facetLink"><?php echo $showValue; ?></a> <span class="badge"><?php echo $hits; ?></span></li>
 <?php endif; ?>
 <?php endforeach; ?>
 <?php if ($class != ''): ?>

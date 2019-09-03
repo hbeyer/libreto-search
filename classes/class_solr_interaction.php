@@ -4,7 +4,7 @@ class solr_interaction {
 
     const BASE_SELECT = 'http://localhost:8983/solr/libreto/select?';
     const FORMAT = 'php';
-    public $rows = 25;
+    public $rows = 20;
 
     public $search_fields = array(
         'fullText' => 'Volltext', 
@@ -40,7 +40,8 @@ class solr_interaction {
         'languagesFull_str' => 'Sprache',
         'format_str' => 'Format',
         'histSubject_str' => 'Rubrik',
-        'publishers_str' => 'DruckerIn'
+        'publishers_str' => 'DruckerIn',
+        'misc_str' => 'Sammelband'
     );
 
 }

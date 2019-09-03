@@ -94,7 +94,7 @@ class solr_response extends solr_interaction {
     public function getRefineContent($refine) {
         $explode = explode(':', $refine);
         $field = array_shift($explode);
-        $content = array_shift($explode);
+        $content = implode(':', $explode);
         $label = $this->facet_fields[$field];
         return(array('label' => $label, 'content' => $content));    
     }

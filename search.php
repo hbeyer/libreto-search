@@ -1,8 +1,7 @@
 <?php
-include('classes/class_solr_interaction.php');
-include('classes/class_solr_request.php');
-include('classes/class_solr_response.php');
-include('classes/class_reference.php');
+foreach (glob("classes/class_*.php") as $filename) {
+    include $filename;
+}
 include('templates/functions.php');
 if (!isset($_GET['field'])) {
     $_GET['field'] = 'fullText';
