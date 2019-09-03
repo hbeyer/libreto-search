@@ -4,16 +4,17 @@ class solr_interaction {
 
     const BASE_SELECT = 'http://localhost:8983/solr/libreto/select?';
     const FORMAT = 'php';
+    public $rows = 25;
 
     public $search_fields = array(
         'fullText' => 'Volltext', 
         'titleBib' => 'Titel', 
         'titleCat' => 'Titel Altkatalog', 
-        'author' => 'Autor(in)', 
-        'contributor' => 'Beiträger(in)', 
+        'author' => 'AutorIn', 
+        'contributor' => 'BeiträgerIn', 
         'histSubject' => 'Rubrik Altkatalog', 
         'place' => 'Erscheinungsort', 
-        'publisher' => 'Drucker(in)', 
+        'publishers' => 'DruckerIn/VerlegerIn', 
         'yearNormalized' => 'Jahr', 
         'subjects' => 'Inhalt', 
         'genres' => 'Gattung', 
@@ -39,7 +40,7 @@ class solr_interaction {
         'languagesFull_str' => 'Sprache',
         'format_str' => 'Format',
         'histSubject_str' => 'Rubrik',
-        'publisher_str' => 'Drucker(in)'
+        'publishers_str' => 'DruckerIn'
     );
 
 }

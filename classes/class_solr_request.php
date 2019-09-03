@@ -32,9 +32,11 @@ class solr_request extends solr_interaction {
 
             if (isset($get['refine'])) {
                 foreach ($get['refine'] as $refine) {
-                    $keyValue = explode(':', $refine);
-                    if (isset($keyValue[0]) and isset($keyValue[1])) {
-                        $this->queries[] = array('field' =>  htmlspecialchars($keyValue[0]), 'value' => '"'.htmlspecialchars($keyValue[1]).'"');
+                    $splitRefine = explode(':', $refine);
+                    if (isset($splitRefine[0]) and isset($splitRefine[1])) {
+                        $keyRefine = array_shift($splitRefine);
+                        $valueRefine = implode(':', $splitRefine);
+                        $this->queries[] = array('field' =>  htmlspecialchars($keyRefine), 'value' => htmlspecialchars($valueRefine));
                     }
                 }
             }
@@ -60,13 +62,16 @@ class solr_request extends solr_interaction {
 
         $queryArray = array();
         foreach ($this->queries as $query) {
-            $query['value'] = urlencode($query['value']);
+            $query['value'] = solr_request::prepareQueryValue($query['value']);
             if ($query['value'] == '') {
                 $query['value'] = '*';
-            }        
+            }
+            elseif (substr($query['field'], -4) == '_str') {
+                $query['value'] = '"'.$query['value'].'"';
+            }
             if ($query['field'] == 'fullText') {
                 $queryArray[] = $query['value'];
-            }
+            }            
             else {
                 $queryArray[] = $query['field'].':'.$query['value'];
             }
@@ -85,7 +90,12 @@ class solr_request extends solr_interaction {
         $facetString = implode('&', $facetArray);
         $facetString .= '&facet=on&';
 
-        return(solr_request::BASE_SELECT.$facetString.$filterString.$queryString.$start.'&wt='.solr_request::FORMAT);
+        $rows = '';
+        if ($this->rows != 10) {
+            $rows = '&rows='.$this->rows;
+        }
+
+        return(solr_request::BASE_SELECT.$facetString.$filterString.$queryString.$start.'&wt='.solr_request::FORMAT.$rows);
 
     }
 
@@ -110,6 +120,14 @@ class solr_request extends solr_interaction {
             }
         }
         return(true);
+    }
+
+    static function prepareQueryValue($value) {
+        //$specialCharSOLR = array('+' => '\+', '-' => '\-', '&&' => '\&&', '||' => '\||', '!' => '\!', '(' => '\(', ')' => '\)', '{' => '\{', '}' => '\}', '[' => '\[', ']' => '\]', '^' => '\^', '"' => '\"', '~' => '\~', '*' => '\*', '?' => '\?', ':' => '\:', '/' => '\/');
+        $specialCharSOLR = array('+' => '\+', '-' => '\-', '&&' => '\&&', '||' => '\||', '!' => '\!', '(' => '\(', ')' => '\)', '{' => '\{', '}' => '\}', '[' => '\[', ']' => '\]', '^' => '\^', '"' => '\"', '?' => '\?', ':' => '\:', '/' => '\/');
+        $value = strtr($value, $specialCharSOLR);
+        $value = urlencode($value);
+        return($value);
     }
 
 }

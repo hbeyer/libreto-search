@@ -5,7 +5,6 @@ class solr_response extends solr_interaction {
     public $errorMessage = false;
     public $numFound;
     public $start;
-    public $rows = 10;
     private $responsePHP = false;
     
     function __construct($url) {
