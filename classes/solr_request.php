@@ -8,10 +8,13 @@ class solr_request extends solr_interaction {
        
     /*  Variablen für die Suche */
     private $queries;
+    private $filter_queries;
     private $filters_active = array();
     private $start = 0;
 
     function __construct($get = null) {
+        $this->queries = new lucene_query_set;
+        $this->filter_queries = new lucene_query_set;
         if (isset($get['start'])) {
             $this->start = $get['start'];
         }
@@ -21,12 +24,11 @@ class solr_request extends solr_interaction {
                 $value = rtrim('*', $value);
                 $value .= '~';
             }
-            $this->queries = new lucene_query_set;
             $this->queries->addQuery(new lucene_search_query(htmlspecialchars($get['field']), $value));
             if (isset($get['owner'])) {
                 if (in_array('all', $get['owner']) == false)  {
                     foreach ($get['owner'] as $gnd) {
-                        $this->filters_active[] = $gnd;
+                        $this->filter_queries->addQuery(new lucene_filter_query($gnd));
                     }
                 }
             }
@@ -47,14 +49,7 @@ class solr_request extends solr_interaction {
 
     private function toURL() {
                 
-        $filterString = '';
-        if (isset($this->filters[0])) {
-            $filters = array();
-            foreach ($this->filters as $gnd) {
-                $filters[] = $this->filter_field.':'.$gnd;
-            }
-            $filterString = 'fq='.implode(urlencode(' OR '), $filters).'&';
-        }
+        $filterString = $this->filter_queries->makeFilterQueryString();
 
         $queryString = $this->queries->makeQueryString();
 

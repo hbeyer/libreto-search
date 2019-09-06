@@ -14,6 +14,13 @@ class lucene_query_set {
 		return('q='.implode('+AND+', $this->content));
 	}
 
+	public function makeFilterQueryString() {
+		if (!empty($this->content[0])) {
+			return('fq='.implode('+OR+', $this->content).'&');
+		}
+		return('');
+	}
+
 }
 
 ?>
