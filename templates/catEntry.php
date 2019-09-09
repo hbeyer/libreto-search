@@ -7,7 +7,7 @@
 <?php endif; ?>
 <?php if (isset($doc['owner'][0])): ?>
 <div class="row">
-    <div class="col-sm-2"><i>Besitzer(in)</i></div>
+    <div class="col-sm-2"><i>BesitzerIn</i></div>
     <div class="col-sm-10"><?php echo $doc['owner'][0]; ?><?php if (isset($doc['ownerGND'])): ?> <a href="http://beaconfinder.mww-forschung.de/index.php?gnd=<?php echo $doc['ownerGND']; ?>" title="Informationsseite zur Person anzeigen" target="_blank"><span class="glyphicon glyphicon-info-sign"></span></a><?php endif; ?></div>
 </div>
 <?php endif; ?>

@@ -80,6 +80,10 @@
 <hr />
 <?php include('templates/catEntry.php'); ?>
 <?php endif; ?>
+<?php if (isset($doc['misc'][0]) and isset($doc['positionMisc'][0])): ?>
+<hr />
+<?php include('templates/misc.php'); ?>
+<?php endif; ?>
 <?php if (isset($doc['institutionOriginal'][0]) or isset($doc['shelfmarkOriginal'][0])): ?>
 <hr />
 <?php include('templates/originalItem.php'); ?>
