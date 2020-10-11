@@ -41,6 +41,7 @@ $request = new solr_request($_GET);
             <div class="row" style="margin-bottom:30px;">
                 <h1>Rekonstruktion historischer Bibliotheken</h1>
             </div>
+            <!--<p><?php echo $request->url; ?></p>-->
             <div class="row">
                 <form action="search.php" method="get">
 

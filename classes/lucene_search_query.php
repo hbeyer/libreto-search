@@ -4,11 +4,9 @@ class lucene_search_query extends lucene_query {
 	
 	function __construct($field, $value) {
 		$this->field = $field;
-		if ($value == '') {
+		$this->value = urlencode($value);
+		if ($this->value == '') {
 			$this->value = '*';
-		}
-		else {
-			$this->value = $value;
 		}
 		if (substr($this->field, -4) == '_str') {
 			$this->value = '"'.$this->value.'"';
@@ -41,6 +39,7 @@ class lucene_search_query extends lucene_query {
 	}
 
 	public function __toString() {
+		//$this->value = urlencode($this->value);
 		if ($this->field == 'fullText') {
 			return($this->value);
 		}

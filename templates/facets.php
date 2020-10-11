@@ -21,6 +21,9 @@ if ($field == 'misc_str') {
     $misc = new miscellany($value);
     $showValue = $misc->__toString();
 }
+elseif ($field == 'manifestationFull_str') {
+    $showValue = strtr($value, array('#' => ' '));
+}
 ?>
                     <li<?php echo $class; ?>><a href="<?php echo $this->buildFacetLink($field.':'.$value); ?>" class="facetLink"><?php echo $showValue; ?></a> <span class="badge"><?php echo $hits; ?></span></li>
 <?php endif; ?>

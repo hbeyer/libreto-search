@@ -80,7 +80,7 @@ class solr_response extends solr_interaction {
             return('#');
         }
         $result = $this->buildGETRequest();
-        $result .= '&refine[]='.$addRefine;
+        $result .= '&refine[]='.urlencode($addRefine);
         return($result);
     }
     

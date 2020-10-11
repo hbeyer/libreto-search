@@ -11,7 +11,7 @@ class lucene_query_set {
 	}
 
 	public function makeQueryString() {
-		return('q='.implode('+AND+', $this->content));
+			return('q='.implode('+AND+', $this->content));
 	}
 
 	public function makeFilterQueryString() {

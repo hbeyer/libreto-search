@@ -40,8 +40,10 @@ class solr_interaction {
         'languagesFull_str' => 'Sprache',
         'format_str' => 'Format',
         'histSubject_str' => 'Rubrik',
+        'place_str' => 'Erscheinungsort',
         'publishers_str' => 'DruckerIn',
-        'misc_str' => 'Sammelband'
+        'misc_str' => 'Sammelband',
+        'manifestationFull_str' => 'Ausgabe'
     );
     public $range_fields = array(
     	'yearNormalized'
