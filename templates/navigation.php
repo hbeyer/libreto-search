@@ -1,6 +1,7 @@
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
+                    <li><a href="http://bibliotheksrekonstruktion.hab.de">Home</a></li>
 <?php foreach ($categories as $key => $category): ?>
                     <li<?php echo $category['active']; ?>><a href="<?php echo $key; ?>"><?php echo $category['label']; ?></a></li>
 <?php endforeach; ?>

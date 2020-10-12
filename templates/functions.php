@@ -2,9 +2,9 @@
 
 function makeNavigation() {
     $categories = array(
-        'index.php' => array('label' => 'Home', 'active' =>  ''),
-        'search.php' => array('label' => 'Suchmaschine', 'active' =>  ''),
-        'ontology.php' => array('label' => 'Ontologie', 'active' =>  '')
+        'index.php' => array('label' => 'Suchmaschine', 'active' =>  '')
+        //'search.php' => array('label' => 'Suchmaschine', 'active' =>  ''),
+        //'ontology.php' => array('label' => 'Ontologie', 'active' =>  '')
     );
 
     $chunks = explode('/', $_SERVER['SCRIPT_FILENAME']);

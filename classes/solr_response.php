@@ -52,7 +52,7 @@ class solr_response extends solr_interaction {
         }
 
     private function buildGETRequest() {
-        $result = 'search.php?';
+        $result = 'index.php?';
         $result .= 'field='.$_GET['field'].'&';
         $result .= 'value='.$_GET['value'].'&';
         if ($_GET['fuzzy'] == 'yes') { 
