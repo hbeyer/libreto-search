@@ -51,8 +51,8 @@
     <div class="col-sm-10"><?php echo $doc['format'][0]; ?></div>
 </div>
 <?php endif; ?>
-<?php if (isset($doc['titleManifestation'][0]) and isset($doc['linkManifestation'][0])): ?>
-            <div class="row"><div class="col-sm-2"><i>Nachweis</i></div><div class="col-sm-10"><a href="<?php echo $doc['linkManifestation'][0]; ?>" title="Nachweis dieser Ausgabe in <?php echo $doc['titleManifestation'][0]; ?>" target="_blank"><?php echo $doc['titleManifestation'][0]; ?></a></div></div>
+<?php if (isset($doc['nameSystemManifestation'][0]) and isset($doc['linkManifestation'][0])): ?>
+            <div class="row"><div class="col-sm-2"><i>Nachweis</i></div><div class="col-sm-10"><a href="<?php echo $doc['linkManifestation'][0]; ?>" title="Nachweis dieser Ausgabe in <?php echo $doc['nameSystemManifestation'][0]; ?>" target="_blank"><?php echo $doc['nameSystemManifestation'][0]; ?></a></div></div>
 <?php endif; ?>
 <?php if (isset($doc['comment'][0])): ?>
 <div class="row">
