@@ -38,6 +38,7 @@ class solr_interaction {
     );
     public $facet_fields = array(
         'nameCollection_str' => 'Sammlung',
+        'borrower_pers_str' => 'Ausleihende',
         'subjects_str' => 'Inhalte',
         'genres_str' => 'Gattung',
         'languagesFull_str' => 'Sprache',

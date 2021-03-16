@@ -24,6 +24,11 @@ if ($field == 'misc_str') {
 elseif ($field == 'manifestationFull_str') {
     $showValue = strtr($value, array('#' => ' '));
 }
+elseif ($field == 'borrower_pers_str') {
+    $pieces = explode('#', $value);
+    $showValue = $pieces[0];
+    unset($pieces);
+}
 ?>
                     <li<?php echo $class; ?>><a href="<?php echo $this->buildFacetLink($field.':'.$value); ?>" class="facetLink"><?php echo $showValue; ?></a> <span class="badge"><?php echo $hits; ?></span></li>
 <?php endif; ?>
