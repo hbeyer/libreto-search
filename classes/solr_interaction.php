@@ -29,7 +29,7 @@ class solr_interaction {
         'all' => 'Alle',
         '141678615' => 'Antoinette Amalie von Braunschweig-Wolfenbüttel',
         '128989289' => 'Bahnsen, Benedikt',
-        '104277122' => 'Elisabeth Sophie Marie von  Braunschweig-Lüneburg'
+        '104277122' => 'Elisabeth Sophie Marie von  Braunschweig-Lüneburg',
         '117364177' => 'Sturm, Leonhard Christoph',
         '11566-6' => 'Ausleihverzeichnisse der HAB',
         '116118547' => 'Caselius, Johannes',
